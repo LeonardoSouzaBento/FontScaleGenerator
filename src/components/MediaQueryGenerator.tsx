@@ -185,7 +185,7 @@ export const MediaQueryGenerator = () => {
         <div className="flex gap-3">
           <Button 
             onClick={handleGenerateTailwind} 
-            className="flex-1 bg-gradient-to-r from-primary to-gradient-end hover:opacity-90 transition-all duration-200 hover:scale-[1.02]"
+            className="flex-1 bg-linear-to-r from-primary to-end hover:opacity-90 transition-all duration-200 hover:scale-[1.02]"
           >
             Gerar para Tailwind
           </Button>
@@ -200,7 +200,7 @@ export const MediaQueryGenerator = () => {
 
         {output && (
           <div className="space-y-3 animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto whitespace-pre-wrap break-words border border-border">
+            <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto whitespace-pre-wrap wrap-break-word border border-border">
               {output}
             </pre>
             <Button

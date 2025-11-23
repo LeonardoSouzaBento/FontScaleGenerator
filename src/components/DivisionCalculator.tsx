@@ -89,7 +89,7 @@ export const DivisionCalculator = () => {
 
         <Button 
           onClick={handleDividir} 
-          className="w-full bg-gradient-to-r from-primary to-gradient-end hover:opacity-90 transition-all duration-200 hover:scale-[1.02]"
+          className="w-full bg-linear-to-r from-primary to-end hover:opacity-90 transition-all duration-200 hover:scale-[1.02]"
         >
           Dividir
         </Button>
