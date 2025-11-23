@@ -145,17 +145,18 @@ export const MediaQueryGenerator = () => {
   };
 
   return (
-    <Card className="w-full max-w-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <Card className={`w-full max-w-2xl shadow-lg hover:shadow-xl 
+    transition-shadow duration-300`}>
       <CardHeader>
-        <CardTitle className="text-2xl font-semibold">Gerador de Media Queries</CardTitle>
+        <CardTitle className={`text-2xl font-semibold`}>Gerador de Media Queries</CardTitle>
         <CardDescription>
           Gere media queries CSS ou classes Tailwind responsivas
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-muted-foreground">
+      <CardContent className={`space-y-4`}>
+        <div className={`grid grid-cols-2 gap-4`}>
+          <div className={`space-y-2`}>
+            <label className={`text-sm font-medium text-muted-foreground`}>
               Tamanho mínimo (em)
             </label>
             <Input
@@ -164,11 +165,11 @@ export const MediaQueryGenerator = () => {
               value={minSize}
               onChange={(e) => setMinSize(e.target.value)}
               placeholder="1.0"
-              className="transition-all duration-200 focus:scale-[1.02]"
+              className={`transition-all duration-200 focus:scale-[1.02]`}
             />
           </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-muted-foreground">
+          <div className={`space-y-2`}>
+            <label className={`text-sm font-medium text-muted-foreground`}>
               Tamanho máximo (em)
             </label>
             <Input
@@ -177,45 +178,45 @@ export const MediaQueryGenerator = () => {
               value={maxSize}
               onChange={(e) => setMaxSize(e.target.value)}
               placeholder="1.0"
-              className="transition-all duration-200 focus:scale-[1.02]"
+              className={`transition-all duration-200 focus:scale-[1.02]`}
             />
           </div>
         </div>
 
-        <div className="flex gap-3">
+        <div className={`flex gap-3`}>
           <Button 
             onClick={handleGenerateTailwind} 
-            className="flex-1 bg-linear-to-r from-primary to-end hover:opacity-90 transition-all duration-200 hover:scale-[1.02]"
+            className={`flex-1 bg-linear-to-r from-primary to-end hover:opacity-90 transition-all duration-200 hover:scale-[1.02]`}
           >
             Gerar para Tailwind
           </Button>
           <Button 
             onClick={handleGenerateCSS} 
             variant="secondary"
-            className="flex-1 transition-all duration-200 hover:scale-[1.02]"
+            className={`flex-1 transition-all duration-200 hover:scale-[1.02]`}
           >
             Gerar para CSS
           </Button>
         </div>
 
         {output && (
-          <div className="space-y-3 animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto whitespace-pre-wrap wrap-break-word border border-border">
+          <div className={`space-y-3 animate-in fade-in slide-in-from-bottom-4 duration-300`}>
+            <pre className={`bg-muted p-4 rounded-lg text-sm overflow-x-auto whitespace-pre-wrap wrap-break-word border border-border`}>
               {output}
             </pre>
             <Button
               onClick={handleCopy}
               variant="outline"
-              className="w-full transition-all duration-200 hover:scale-[1.02]"
+              className={`w-full transition-all duration-200 hover:scale-[1.02]`}
             >
               {copied ? (
                 <>
-                  <Check className="mr-2 h-4 w-4" />
+                  <Check className={`mr-2 h-4 w-4`} />
                   Copiado!
                 </>
               ) : (
                 <>
-                  <Copy className="mr-2 h-4 w-4" />
+                  <Copy className={`mr-2 h-4 w-4`} />
                   Copiar para área de transferência
                 </>
               )}

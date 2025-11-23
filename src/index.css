@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Fonte */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap");
 
 /*primeiro comit*/
 @theme {
@@ -78,26 +80,14 @@
   --color-ring: hsl(186 62% 55%);
 }
 
-
 @layer base {
   * {
-    @apply border-[hsl(var(--color-border))];
+    @apply border-border;
   }
 
   body {
-    @apply bg-[hsl(var(--color-background))] text-[hsl(var(--color-foreground))];
+    @apply text-foreground bg-linear-to-br from-[#f9fafb00] to-[#f3f5f7];
     font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI",
       sans-serif;
-
-    background: linear-gradient(
-      135deg,
-      hsl(var(--color-background)) 0%,
-      hsl(210 20% 96%) 100%
-    );
-
-    min-height: 100vh;
   }
 }
-
-/* Fonte */
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap");

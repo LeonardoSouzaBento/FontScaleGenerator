@@ -5,6 +5,14 @@
   text-align: center;
 }
 
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; 
+}
+html, body {
+  scrollbar-width: none; /* não é 0 — é none */
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

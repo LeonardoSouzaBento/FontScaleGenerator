@@ -46,19 +46,20 @@ export const DivisionCalculator = () => {
   };
 
   return (
-    <Card className="w-full max-w-sm shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <Card className={`w-full max-w-sm shadow-lg hover:shadow-xl 
+    transition-shadow duration-300 border border-gray-50`}>
       <CardHeader>
-        <CardTitle className="text-xl font-semibold flex items-center gap-2">
-          <Calculator className="h-5 w-5 text-primary" />
+        <CardTitle className={`text-xl font-semibold flex items-center gap-2`}>
+          <Calculator className={`h-5 w-5 text-primary`} />
           Fazer Divisões
         </CardTitle>
         <CardDescription>
           Calcule divisões e obtenha o resultado em em
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-muted-foreground">
+      <CardContent className={`space-y-4`}>
+        <div className={`space-y-2`}>
+          <label className={`text-sm font-medium text-muted-foreground`}>
             Valor a dividir:
           </label>
           <Input
@@ -68,12 +69,12 @@ export const DivisionCalculator = () => {
             onChange={(e) => setValor1(e.target.value)}
             onKeyDown={handleKeyPress}
             placeholder="Digite o valor"
-            className="transition-all duration-200 focus:scale-[1.02]"
+            className={`transition-all duration-200 focus:scale-[1.02]`}
           />
         </div>
 
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-muted-foreground">
+        <div className={`space-y-2`}>
+          <label className={`text-sm font-medium text-muted-foreground`}>
             Divisor (persiste):
           </label>
           <Input
@@ -83,21 +84,21 @@ export const DivisionCalculator = () => {
             onChange={(e) => setValor2(e.target.value)}
             onKeyDown={handleKeyPress}
             placeholder="Digite o divisor"
-            className="transition-all duration-200 focus:scale-[1.02]"
+            className={`transition-all duration-200 focus:scale-[1.02]`}
           />
         </div>
 
         <Button 
           onClick={handleDividir} 
-          className="w-full bg-linear-to-r from-primary to-end hover:opacity-90 transition-all duration-200 hover:scale-[1.02]"
+          className={`w-full bg-linear-to-r from-primary to-end hover:opacity-90 transition-all duration-200 hover:scale-[1.02]`}
         >
           Dividir
         </Button>
 
         {resultado && (
-          <div className="space-y-3 animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <div className="min-h-[3rem] flex items-center justify-center bg-muted rounded-lg border border-border p-4">
-              <span className="text-lg font-semibold text-foreground">
+          <div className={`space-y-3 animate-in fade-in slide-in-from-bottom-4 duration-300`}>
+            <div className={`min-h-12 flex items-center justify-center bg-muted rounded-lg border border-border p-4`}>
+              <span className={`text-lg font-semibold text-foreground`}>
                 {resultado}
               </span>
             </div>
@@ -106,16 +107,16 @@ export const DivisionCalculator = () => {
               <Button
                 onClick={handleCopy}
                 variant="outline"
-                className="w-full transition-all duration-200 hover:scale-[1.02]"
+                className={`w-full transition-all duration-200 hover:scale-[1.02]`}
               >
                 {copied ? (
                   <>
-                    <Check className="mr-2 h-4 w-4" />
+                    <Check className={`mr-2 h-4 w-4`} />
                     Copiado!
                   </>
                 ) : (
                   <>
-                    <Copy className="mr-2 h-4 w-4" />
+                    <Copy className={`mr-2 h-4 w-4`} />
                     Copiar resultado
                   </>
                 )}
