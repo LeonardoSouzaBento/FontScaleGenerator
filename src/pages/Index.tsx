@@ -22,7 +22,7 @@ const Index = () => {
         </header>
 
         {/* Main Content */}
-        <div className={`grid lg:grid-cols-3 gap-6 items-start max-w-5xl mx-auto`}>
+        <div className={`grid lg:grid-cols-3 gap-6 items-center justify-center mx-auto`}>
           {/* Media Query Generator - Takes 2 columns */}
           <div className={`lg:col-span-2 animate-in fade-in slide-in-from-left duration-700`}>
             <MediaQueryGenerator />
