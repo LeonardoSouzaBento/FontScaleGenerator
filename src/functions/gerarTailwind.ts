@@ -1,8 +1,9 @@
 export function gerarTailwind(
+  minBase: number = 16, // base até 640px
+  maxBase: number = 16, // base em XL
   minFontSize: number, // px para telas pequenas
   maxFontSize: number, // px para XL
-  minBase: number = 17.5, // base até 640px
-  maxBase: number = 18.5 // base em XL
+  measurement: "px" | "em" = "px"
 ): string {
   const breakpoints = [
     { prefix: "", width: 375 },
@@ -13,32 +14,46 @@ export function gerarTailwind(
     { prefix: "2xl", width: 1536 },
   ];
 
-  // conversão para em usando as bases definidas
-  const minSizeEm = minFontSize / minBase;
-  const maxSizeEm = maxFontSize / maxBase;
-
-  // para interpolar linearmente, trabalhamos em EM
   const firstWidth = breakpoints[0].width; // 375
   const lastWidth = breakpoints[4].width; // 1280 (xl)
   const maxWidth = breakpoints[5].width; // 1536 (2xl)
 
-  const calcEm = (value: number) => value.toFixed(5);
+  // Determine the base values for interpolation based on the desired measurement
+  const baseMinSize =
+    measurement === "em" ? minFontSize / minBase : minFontSize;
+  const baseMaxSize =
+    measurement === "em" ? maxFontSize / maxBase : maxFontSize;
 
-  // calcula tamanho para um breakpoint intermediário
-  const calcFontSize = (width: number): string => {
-    const size =
-      minSizeEm +
-      (maxSizeEm - minSizeEm) *
-        ((width - firstWidth) / (lastWidth - firstWidth));
+  const formatSize = (value: number): string => {
+    // sempre gerar 6 casas para ter padrão
+    const fixed = value.toFixed(6);
 
-    return calcEm(size);
+    // separa parte inteira e decimal
+    const [int, dec] = fixed.split(".");
+
+    // REGRA:
+    // remover zeros finais enquanto houver mais que 2 zeros seguidos
+    let trimmed = dec.replace(/0+$/, (zeros) => {
+      return zeros.length > 2 ? zeros.slice(0, 2) : zeros;
+    });
+
+    return `${int}.${trimmed}`;
   };
 
-  // projeção para 2xl (continua o mesmo crescimento linear)
-  const calc2xl = (): string => {
-    const growthPerPx = (maxSizeEm - minSizeEm) / (lastWidth - firstWidth);
+  // Calculates size for an intermediate breakpoint
+  const calcInterpolatedSize = (width: number): string => {
+    const size =
+      baseMinSize +
+      (baseMaxSize - baseMinSize) *
+        ((width - firstWidth) / (lastWidth - firstWidth));
+    return formatSize(size);
+  };
+
+  // Projection for 2xl (continues the same linear growth)
+  const calc2xlSize = (): string => {
+    const growthPerPx = (baseMaxSize - baseMinSize) / (lastWidth - firstWidth);
     const extra = (maxWidth - lastWidth) * growthPerPx;
-    return calcEm(maxSizeEm + extra);
+    return formatSize(baseMaxSize + extra);
   };
 
   let result = "";
@@ -47,16 +62,18 @@ export function gerarTailwind(
     let size: string;
 
     if (bp.prefix === "") {
-      size = calcEm(minSizeEm);
+      size = formatSize(baseMinSize);
     } else if (bp.prefix === "xl") {
-      size = calcEm(maxSizeEm);
+      size = formatSize(baseMaxSize);
     } else if (bp.prefix === "2xl") {
-      size = calc2xl();
+      size = calc2xlSize();
     } else {
-      size = calcFontSize(bp.width);
+      size = calcInterpolatedSize(bp.width);
     }
 
-    result += ` ${bp.prefix ? bp.prefix + ":" : ""}text-[${size}em]`;
+    result += ` ${
+      bp.prefix ? bp.prefix + ":" : ""
+    }text-[${size}${measurement}]`;
   });
 
   return result.trim();

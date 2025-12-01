@@ -1,46 +1,47 @@
-# 🎨 CSS Tools - Gerador de Font Sizes Responsivos
+# 🎨 O que é Font Size Generator?
 
 Uma aplicação web que facilita a criação de tamanhos de fonte responsivos para **Tailwind CSS** e **Styled Components**.
 
-**CSS Tools** é uma ferramenta desenvolvida para simplificar o processo de criação de tipografia responsiva. Ao invés de definir manualmente media queries para cada breakpoint, esta aplicação gera automaticamente o código necessário com base em valores mínimos e máximos de tamanho de fonte.
+## 🛣️ Objetivo do projeto
 
-## ✨ Funcionalidade
+Criar tamanhos de fonte responsivos de forma profissional. Evitando que sites em telas de desktop tenham tamanhos de fonte muito pequenos.
 
-Gera classes de tamanho de fonte responsivas com interpolação linear entre breakpoints.
+## 🎯 O que ele faz exatamente?
 
-**Características:**
+- Geração de classes utilitárias de Tailwind CSS para definir tamanhos de fonte responsivos
+- Geração de media queries CSS para Styled Components para gerar tamanhos de fonte responsivos
+- Oferece cópia para área de transferência com um clique
 
-- Entrada de tamanhos mínimo e máximo em pixels
-- Configuração de bases personalizadas para diferentes breakpoints
-- Geração para Tailwind CSS (classes utilitárias)
-- Geração para Styled Components (media queries CSS)
-- Cópia para área de transferência com um clique
+## Saiba como definir os tamanhos de fonte de modo profissional
 
-## 🛠️ Tecnologias Utilizadas
+Como você sabe, os tamanhos de fonte de titulos em arquivos html simples já vem com tamanhos definidos.
+Vamos aplicar essa configuração de modo refinado.
+Altere o tamanho de fonte base do body para o elemento <p> com tamanhos de fonte convenientes.
+Exemplos:
 
-### Core
+CSS:
+```css
+  @media (max-width: 640px) {
+    body {
+      font-size: 17px;
+    }
+  }
+  @media (min-width: 1280px) {
+    body {
+      font-size: 18.5px;
+    }
+  }
+```
+Tailwind:
+```html
+<body class="text-[17px] xl:text-[18.5px]"></body>
+```
+Font Size Generator gera para você os tamanhos intermediários e o último tamanho, para telas maiores que 1280px.
+Assim, a tag p fica com bons tamanhos de fonte. Se quiser uma tag p menor, use algo como 0.9em. Vai ficar responsivo porque esse "em" é em relação aos tamanhos base do body que vc definiu (desque você não defina fontes sizes em divs. Isso sobrepoe o que for definido no body, pois a medida 'em' é 'em relação ao fonte size do pai mais proximo'.).
 
-- **[React](https://react.dev/)** `18.3.1` - Biblioteca JavaScript para construção de interfaces
-- **[TypeScript](https://www.typescriptlang.org/)** `5.8.3` - Superset tipado de JavaScript
-- **[Vite](https://vitejs.dev/)** `5.4.19` - Build tool e dev server ultrarrápido
+Os titulos, h1, h2, h3, h4, h5, h6, no entando, precisam de tamanhos de fonte diferentes.
 
-### Estilização
-
-- **[Tailwind CSS](https://tailwindcss.com/)** `4.1.17` - Framework CSS utilitário
-- **[Radix UI](https://www.radix-ui.com/)** - Componentes acessíveis e sem estilo
-- **[Lucide React](https://lucide.dev/)** - Ícones modernos
-
-### UI Components
-
-- **[shadcn/ui](https://ui.shadcn.com/)** - Componentes reutilizáveis construídos com Radix UI
-- **[Sonner](https://sonner.emilkowal.ski/)** - Notificações toast elegantes
-
-### Roteamento e Estado
-
-- **[React Router DOM](https://reactrouter.com/)** `6.30.1` - Roteamento declarativo
-- **[TanStack Query](https://tanstack.com/query)** `5.83.0` - Gerenciamento de estado assíncrono
-
-### Processo de uso
+## 🧐 Processo de uso
 
 1. **Defina os tamanhos em pixels:**
 
@@ -59,14 +60,16 @@ Gera classes de tamanho de fonte responsivas com interpolação linear entre bre
 
 4. **Copie o código gerado**
 
-#### Exemplo de Saída - Tailwind CSS
+#### Exemplos de Saída -
 
-```html
+- Em Tailwind
+
+```css
 text-[0.94595em] sm:text-[0.97297em] md:text-[0.98649em] lg:text-[0.99324em]
 xl:text-[1.00000em] 2xl:text-[1.01351em]
 ```
 
-#### Exemplo de Saída - Styled Components
+- Em Styled Components
 
 ```css
 @media screen and (max-width: 375px) {
@@ -165,6 +168,30 @@ O algoritmo para Styled Components:
 - Acima de `1201px`: Tamanho máximo
 
 ---
+
+## 🛠️ Tecnologias Utilizadas
+
+### Core
+
+- **[React](https://react.dev/)** `18.3.1` - Biblioteca JavaScript para construção de interfaces
+- **[TypeScript](https://www.typescriptlang.org/)** `5.8.3` - Superset tipado de JavaScript
+- **[Vite](https://vitejs.dev/)** `5.4.19` - Build tool e dev server ultrarrápido
+
+### Estilização
+
+- **[Tailwind CSS](https://tailwindcss.com/)** `4.1.17` - Framework CSS utilitário
+- **[Radix UI](https://www.radix-ui.com/)** - Componentes acessíveis e sem estilo
+- **[Lucide React](https://lucide.dev/)** - Ícones modernos
+
+### UI Components
+
+- **[shadcn/ui](https://ui.shadcn.com/)** - Componentes reutilizáveis construídos com Radix UI
+- **[Sonner](https://sonner.emilkowal.ski/)** - Notificações toast elegantes
+
+### Roteamento e Estado
+
+- **[React Router DOM](https://reactrouter.com/)** `6.30.1` - Roteamento declarativo
+- **[TanStack Query](https://tanstack.com/query)** `5.83.0` - Gerenciamento de estado assíncrono
 
 ## 📄 Licença
 

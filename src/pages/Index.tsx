@@ -1,5 +1,4 @@
 import { MediaQueryGenerator } from "@/components/MediaQueryGenerator";
-import { DivisionCalculator } from "@/components/DivisionCalculator";
 import { Code2 } from "lucide-react";
 
 const Index = () => {
