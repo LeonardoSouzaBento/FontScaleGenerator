@@ -1,13 +1,13 @@
-import { CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { CardDescription, CardHeader, CardTitle } from "../../ui/card";
 
 const TitleSubtitle = () => {
   return (
     <CardHeader>
       <CardTitle className={`text-2xl font-semibold`}>
-        Gerador de font-sizes
+        Gerador de escalas tipográficas
       </CardTitle>
       <CardDescription>
-        Gere classes TailwindCSS ou CSS de Styled Components
+        Configure os tamanho de fonte do seu projeto
       </CardDescription>
     </CardHeader>
   );

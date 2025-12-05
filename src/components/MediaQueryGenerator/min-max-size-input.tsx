@@ -1,28 +1,15 @@
-import { Input } from "../ui/input";
-
-const WrapperInput = ({
-  children,
-  label,
-}: {
-  children: React.ReactNode;
-  label: string;
-}) => {
-  return (
-    <div className={`flex flex-col gap-2`}>
-      <label className={`size-auto text-sm font-medium text-muted-foreground`}>
-        {label}
-      </label>
-      {children}
-    </div>
-  );
-};
+import { deduceFontAt1530px } from "@/functions/deduceFontAt1530px";
+import { Input } from "../../ui/input";
+import { WrapperInput } from "../../ui/wrapper-input";
 
 interface Props {
   minSize: number;
   setMinSize: (value: number) => void;
   maxSize: number;
   setMaxSize: (value: number) => void;
-  title: React.ReactNode;
+  title?: React.ReactNode;
+  setFontAt1530px: (value: number) => void;
+  htmlFor: string;
 }
 
 const MinMaxSizeInput = ({
@@ -31,25 +18,32 @@ const MinMaxSizeInput = ({
   maxSize,
   setMaxSize,
   title,
+  setFontAt1530px,
+  htmlFor,
 }: Props) => {
   return (
     <div>
-      <p className={`text-md font-medium text-muted-foreground mb-1`}>
-        {title}
-      </p>
+      {title && (
+        <p className={`text-md font-medium text-muted-foreground mb-1`}>
+          {title}
+        </p>
+      )}
       <div className={`grid grid-cols-2 gap-4`}>
-        <WrapperInput label="Até 640px">
+        <WrapperInput htmlFor={htmlFor} label="Max-width 640px">
           <Input
             type="number"
             step="0.01"
             value={minSize}
-            onChange={(e) => setMinSize(parseFloat(e.target.value))}
+            onChange={(e) => {
+              setMinSize(parseFloat(e.target.value));
+              setFontAt1530px(deduceFontAt1530px(minSize, maxSize));
+            }}
             placeholder="1.0"
             className={`transition-all duration-200 focus:scale-[1.02]`}
           />
         </WrapperInput>
 
-        <WrapperInput label="Min-width 1280px">
+        <WrapperInput label="Min-width 1280px" htmlFor={htmlFor}>
           <Input
             type="number"
             step="0.01"

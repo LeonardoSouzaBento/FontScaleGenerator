@@ -1,4 +1,5 @@
-import { Button } from "../ui/button";
+import { generateClampEm } from "@/functions/genClampEm";
+import { Button } from "../../ui/button";
 
 interface LocalButtonProps {
   children: React.ReactNode;
@@ -6,11 +7,7 @@ interface LocalButtonProps {
   styles: string;
 }
 
-const LocalButton = ({
-  children,
-  onClick,
-  styles,
-}: LocalButtonProps) => {
+const LocalButton = ({ children, onClick, styles }: LocalButtonProps) => {
   return (
     <Button
       variant="link"
@@ -32,7 +29,10 @@ const MeasurementDefiner = ({
   return (
     <div className={`grid grid-cols-2 gap-3`}>
       <LocalButton
-        onClick={() => setMeasurement("px")}
+        onClick={() => {
+          setMeasurement("px");
+          console.log(generateClampEm(1.122, 1.523, 640, 1530));
+        }}
         styles={measurement === "px" && "border-primary"}
       >
         Gerar em <strong>px</strong>
