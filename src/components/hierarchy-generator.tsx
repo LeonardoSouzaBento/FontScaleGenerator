@@ -1,16 +1,12 @@
-import { scales, sizes } from "@/data/scaleVars";
+import { scales } from "@/data/scaleVars";
 import { deduceFontAt1530px } from "@/functions/deduceFontAt1530px";
 import { scaleSizesAndReturn } from "@/functions/scaleSizesAndReturn";
-import { MinMaxValues } from "@/types";
 import { Button } from "@/ui/button";
 import CopyButton from "@/ui/copy-button";
 import GenButton from "@/ui/gen-button";
 import { Input } from "@/ui/input";
-import Output from "@/ui/output";
 import { WrapperInput } from "@/ui/wrapper-input";
 import { useEffect, useState } from "react";
-
-const outputExample = "body { clamp ;}";
 
 const HierarchyGenerator = ({
   output,
@@ -22,13 +18,10 @@ const HierarchyGenerator = ({
   const [newMinBase, setnewMinBase] = useState<number | null>(null);
   const [newMaxBase, setnewMaxBase] = useState<number | null>(null);
   const [realMaxBase, setRealMaxBase] = useState<number | null>(null);
-  const [scale, setScale] = useState<string>("");
   const [scaleValue, setScaleValue] = useState<number>(scales[0].value);
   const [canGenerate, setCanGenerate] = useState<number>(0);
 
   useEffect(() => {
-    console.log(newMinBase, newMaxBase, realMaxBase);
-
     if (canGenerate > 0) {
       const minEm = newMinBase / 16;
       const maxEm = realMaxBase / 16;
@@ -83,12 +76,10 @@ const HierarchyGenerator = ({
         >
           {scales.map((item) => (
             <Button
-              key={item.name}
-              value={item.name}
+              key={item.value}
               className={`capitalize`}
               variant={item.value === scaleValue ? "default" : "outline"}
               onClick={() => {
-                setScale(item.name);
                 setScaleValue(item.value);
               }}
             >

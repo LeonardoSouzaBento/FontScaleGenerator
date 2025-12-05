@@ -1,17 +1,18 @@
-import { MinMaxValues, Scale } from "@/types";
+import { SizeHierarchy, Scale } from "@/types";
 
-export const sizes: MinMaxValues[]= [
-  { name: ".big-h1", minValue: 0, maxValue: 0, pow: 7 },
-  { name: "h1", minValue: 0, maxValue: 0, pow: 6 },
-  { name: "h2", minValue: 0, maxValue: 0, pow: 5 },
-  { name: "h3", minValue: 0, maxValue: 0, pow: 4 },
-  { name: "h4", minValue: 0, maxValue: 0, pow: 3 },
-  { name: "h5", minValue: 0, maxValue: 0, pow: 2 },
-  { name: "h6", minValue: 0, maxValue: 0, pow: 1 },
-  { name: ".big-p", minValue: 0, maxValue: 0, pow: 1 },
-  { name: ".normal-p", minValue: 0, maxValue: 0, pow: 0 },
-  { name: ".small-p", minValue: 0, maxValue: 0, pow: -1 },
-  { name: ".smaller-p", minValue: 0, maxValue: 0, pow: -2 },
+export const sizes: SizeHierarchy[] = [
+  { tagName: "body", pow: 0 },
+  { tagName: ".big-h1", pow: 7 },
+  { tagName: "h1", pow: 6 },
+  { tagName: "h2", pow: 5 },
+  { tagName: "h3", pow: 4 },
+  { tagName: "h4", pow: 3 },
+  { tagName: "h5", pow: 2 },
+  { tagName: "h6", pow: 1 },
+  { tagName: ".big-p", pow: 1 },
+  { tagName: ".normal-p", pow: 0 },
+  { tagName: ".small-p", pow: -1 },
+  { tagName: ".smaller-p", pow: -2 },
 ];
 
 export const scales: Scale[] = [

@@ -3,7 +3,8 @@ import { Code2 } from "lucide-react";
 const header = () => {
   return (
     <header
-      className={`text-center space-y-3 animate-in fade-in slide-in-from-top duration-500`}
+      className={`text-center space-y-3 animate-in fade-in 
+        slide-in-from-top duration-500 mb-5`}
     >
       <div className={`flex items-center justify-center gap-3 mb-2`}>
         <div
@@ -19,7 +20,7 @@ const header = () => {
         typographic scale generator
       </h1>
       <p className={`text-lg text-muted-foreground max-w-2xl mx-auto`}>
-        Configure rapidamente os tamanhos de fonte do seu projeto
+        Gere o CSS de escala tipográfica do seu projeto
       </p>
     </header>
   );
