@@ -1,7 +1,14 @@
+
+Seção de perguntas e respostas
+
 Porque definir a fonte até 640px?
 breakpoints muito baixos como 320px ou 375px, são úteis para telefones muito antigos e de baixa resolução (como o iPhone original, que tinha 320px de largura). Hoje em dia, quase todos os smartphones modernos têm uma largura de tela maior que 375px.
 Alem de você precisa de menos media queries
 
-Qual é a relação de tamanho das fontes do google? 
-Eu precisaria de um site que pegasse as fontes e as comparasse com a arial.
+
+
+Novas funcionalidades
+
+Mostrar uma prévia.
+
 Fontes de referencia: Bebas Neue ou Oswald

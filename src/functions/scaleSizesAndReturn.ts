@@ -9,10 +9,24 @@ export function scaleSizesAndReturn(
   const scaledList = sizes.map((item) => {
     return {
       ...item,
-      minSize: Number((minSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)),
-      maxSize: Number((maxSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)),
+      minSize: Number(
+        (minSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)
+      ),
+      maxSize: Number(
+        (maxSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)
+      ),
     };
   });
+
+  const fontSizeValuesList = scaledList.map(({ tagName, minSize, maxSize }) => {
+    if (tagName === ".normal-p") return `1.00em`;
+    else {
+      const clamp = generateClampEm(minSize, maxSize);
+      return clamp;
+    }
+  });
+  
+  console.log(fontSizeValuesList);
 
   const formattedCSS = scaledList
     .map(({ tagName, minSize, maxSize }) => {

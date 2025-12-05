@@ -8,6 +8,11 @@ export interface SizeHierarchy {
   pow: number;
 }
 
+export interface CssValues {
+  tagName: string;
+  value: string;
+}
+
 export interface Scale {
   name: string;
   value: number;

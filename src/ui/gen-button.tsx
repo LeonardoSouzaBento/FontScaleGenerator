@@ -37,7 +37,7 @@ const GenButton = ({
             hover:opacity-90 transition-all duration-200 hover:scale-[1.02]
             tracking-normal uppercase ${
               !newMinBase || !realMaxBase
-                ? "opacity-50 grayscale-100 cursor-not-allowed"
+                ? "opacity-66 grayscale-100 cursor-not-allowed"
                 : ""
             }`}
       >

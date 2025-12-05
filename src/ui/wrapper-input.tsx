@@ -11,7 +11,7 @@ export const WrapperInput = ({
     <div className={`flex flex-col gap-2`}>
       <label
         htmlFor={htmlFor}
-        className={`size-auto font-medium text-muted-foreground`}
+        className={`size-auto font-medium text-muted-foreground mb-1`}
       >
         {"Tag <p> " + label}
       </label>
