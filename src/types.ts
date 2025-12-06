@@ -8,6 +8,12 @@ export interface SizeHierarchy {
   pow: number;
 }
 
+export interface ScaledList {
+  tagName: string;
+  minSize: number;
+  maxSize: number;
+}
+
 export interface CssValues {
   tagName: string;
   value: string;

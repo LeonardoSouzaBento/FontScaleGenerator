@@ -11,6 +11,8 @@ const buttonCSS = `min-h-10.5 w-full transition-all duration-200
 hover:scale-[1.02] bg-white shadow-sm hover:bg-white
 hover:shadow-md border`;
 
+const iconStyle = {strokeWidth: 2.4, size: 22}
+
 const CopyButton = ({ output }: CopyButtonProps) => {
   const [copied, setCopied] = useState(false);
 
@@ -37,12 +39,12 @@ const CopyButton = ({ output }: CopyButtonProps) => {
           justify-center gap-3.5 ${!output && "text-gray-500"}`}>
           {copied ? (
             <>
-              <Check size={22}/>
+              <Check {...iconStyle}/>
               Copiado!
             </>
           ) : (
             <>
-              <Copy size={22}/>
+              <Copy {...iconStyle}/>
               Copiar para área de transferência
             </>
           )}

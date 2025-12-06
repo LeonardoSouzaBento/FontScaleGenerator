@@ -1,4 +1,4 @@
-import { SizeHierarchy, Scale } from "@/types";
+import { SizeHierarchy, Scale, CssValues } from "@/types";
 
 export const sizes: SizeHierarchy[] = [
   { tagName: "body", pow: 0 },
@@ -14,6 +14,13 @@ export const sizes: SizeHierarchy[] = [
   { tagName: ".small-p", pow: -1 },
   { tagName: ".smaller-p", pow: -2 },
 ];
+
+export const defaultCssValues: CssValues[] = sizes.map((item) => {
+  return {
+    tagName: item.tagName,
+    value: "",
+  };
+});
 
 export const scales: Scale[] = [
   { name: "minor-second", value: 1.067 },

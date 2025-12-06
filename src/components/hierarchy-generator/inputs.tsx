@@ -1,7 +1,15 @@
 import { StateSetter } from "@/types";
 import { Input } from "@/ui/input";
 import { WrapperInput } from "@/ui/wrapper-input";
-import { deduceFontAt1530px } from "@/functions/deduceFontAt1530px";
+
+function deduceFontAt1536px(
+  font640: number,
+  font1280: number
+): number {
+  const font1536 = 1.195 * (font1280 - font640) + font640;
+
+  return Number(font1536.toFixed(2));
+}
 
 const Inputs = ({
   newMinBase,
@@ -17,8 +25,8 @@ const Inputs = ({
   setRealMaxBase: StateSetter<number | null>;
 }) => {
   return (
-    <div className={`py-1 grid grid-cols-2 gap-4`}>
-      <WrapperInput htmlFor="minBase" label="em max-width 640px">
+    <div className={`grid grid-cols-2 gap-4 -mb-px`}>
+      <WrapperInput htmlFor="minBase" label="até 640px">
         <Input
           type="number"
           id="minBase"
@@ -29,7 +37,7 @@ const Inputs = ({
         />
       </WrapperInput>
 
-      <WrapperInput htmlFor="maxBase" label="em min-width 1280px">
+      <WrapperInput htmlFor="maxBase" label="em 1280px">
         <Input
           type="number"
           id="maxBase"
@@ -39,7 +47,7 @@ const Inputs = ({
           onChange={(e) => {
             setnewMaxBase(Number(e.target.value));
             setRealMaxBase(
-              deduceFontAt1530px(newMinBase, Number(e.target.value))
+              deduceFontAt1536px(newMinBase, Number(e.target.value))
             );
           }}
         />

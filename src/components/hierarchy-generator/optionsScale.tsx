@@ -15,7 +15,7 @@ const OptionsScale = ({
     >
       <label
         htmlFor="scale"
-        className={`font-medium tracking-wide 
+        className={` tracking-wide 
             text-muted-foreground`}
       >
         Escala tipográfica

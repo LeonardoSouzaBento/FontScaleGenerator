@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  plugins: [react(),tailwindcss(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [react(),tailwindcss(), mode === "development" && componentTagger(),].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

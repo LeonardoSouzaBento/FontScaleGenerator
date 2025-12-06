@@ -23,8 +23,14 @@ const HierarchyGenerator = ({
     if (canGenerate > 0) {
       const minEm = newMinBase / 16;
       const maxEm = realMaxBase / 16;
-
-      const fullCss = scaleSizesAndReturn(minEm, maxEm, scaleValue);
+      const font1280 = newMaxBase / 16;
+      const fullCss = scaleSizesAndReturn(
+        minEm,
+        maxEm,
+        scaleValue,
+        font1280,
+        setCssValues
+      );
 
       setOutput(fullCss);
     }

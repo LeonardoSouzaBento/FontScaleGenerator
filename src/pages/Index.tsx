@@ -1,10 +1,11 @@
+import { useState } from "react";
 import Header from "@/components/header";
 import HierarchyGenerator from "@/components/hierarchy-generator";
-import Prev from "@/components/hierarchy-generator/prev";
+import Prev from "@/components/prev";
+import { defaultCssValues } from "@/data/scaleVars";
 import { CssValues } from "@/types";
 import { Card, CardContent } from "@/ui/card";
 import Output from "@/ui/output";
-import { useState } from "react";
 
 const outputExample = `body {
   font-size: clamp(1.093750em, calc(1.006875em + 0.013574vw), 1.180625em);
@@ -55,7 +56,7 @@ h6 {
 }`;
 
 const Index = () => {
-  const [cssValues, setCssValues] = useState<CssValues[]>([]);
+  const [cssValues, setCssValues] = useState<CssValues[]>(defaultCssValues);
   const [output, setOutput] = useState<string>("");
 
   return (
@@ -63,13 +64,13 @@ const Index = () => {
       <Header />
 
       <main
-        className={`h-max max-w-2xl xl:max-h-96 xl:max-w-7xl mx-auto box-content pb-8 px-3 
+        className={`h-max pb-8 px-3 sm:px-6 max-w-2xl xl:max-h-96 xl:max-w-7xl mx-auto box-content  
           overflow-hidden grid grid-rows-[auto, auto] xl:grid-rows-1 
           xl:grid-cols-2 gap-8 relative`}
       >
         <Card
-          className={`w-full h-max min-h-max pt-6 pb-0.5 mx-auto shadow-lg hover:shadow-xl
-             transition-shadow duration-300`}
+          className={`w-full h-max min-h-max pt-6 pb-0.5 mx-auto shadow-lg 
+            hover:shadow-xl transition-shadow duration-300`}
         >
           <CardContent>
             <HierarchyGenerator
@@ -88,7 +89,7 @@ const Index = () => {
       <Prev />
 
       <footer
-        className={`text-center text-sm text-muted-foreground animate-in fade-in duration-1000`}
+        className={`text-center  text-muted-foreground animate-in fade-in duration-1000`}
       >
         <p>Desenvolvido com React, TypeScript e Tailwind CSS</p>
       </footer>
