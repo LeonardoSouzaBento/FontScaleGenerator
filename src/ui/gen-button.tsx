@@ -35,7 +35,7 @@ const GenButton = ({
         onClick={handleClick}
         className={`w-full min-h-10 flex-1 bg-linear-to-r from-primary to-end
             hover:opacity-90 transition-all duration-200 hover:scale-[1.02]
-            tracking-normal uppercase ${
+            tracking-normal ${
               !newMinBase || !realMaxBase
                 ? "opacity-66 grayscale-100 cursor-not-allowed"
                 : ""

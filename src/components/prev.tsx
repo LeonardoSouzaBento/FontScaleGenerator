@@ -14,7 +14,7 @@ const sectionsSizesMap = [
 
 const css = {
   wrapper: `mb-8 mx-auto w-[calc(100%-1.5rem)] max-w-2xl xl:max-w-7xl 
-    bg-white p-6 rounded-lg shadow-lg 
+    bg-white p-6 rounded-lg shadow-lg
     hover:shadow-xl transition-shadow duration-300`,
   section: `space-y-5 border border-border rounded-lg p-5`,
 };

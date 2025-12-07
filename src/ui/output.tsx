@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { CardContent } from "./card";
 import CopyButton from "./copy-button";
+import { secondOutputExample } from "@/data/secondOutputExample";
+import { outputExample } from "@/data/outputExample";
 
 const css = {
   pre: `bg-gray-50 p-4 rounded-lg 
@@ -10,11 +12,9 @@ const css = {
 const Output = ({
   output,
   secondOutput,
-  outputExample,
 }: {
   output: string;
   secondOutput: string;
-  outputExample: string;
 }) => {
   const [animate, setAnimate] = useState<boolean>(false);
 
@@ -41,12 +41,13 @@ const Output = ({
         >
           {output || outputExample}
         </pre>
+        <h6>Variáveis tailwind para tags p</h6>
         <pre
           className={`${css.pre} ${
             !secondOutput ? "opacity-50" : "opacity-100"
           }`}
         >
-          {secondOutput}
+          {secondOutput || secondOutputExample}
         </pre>
       </div>
       <CopyButton output={output} />

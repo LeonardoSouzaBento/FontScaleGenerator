@@ -6,13 +6,19 @@ import { useEffect, useState } from "react";
 import Inputs from "./hierarchy-generator/inputs";
 import OptionsScale from "./hierarchy-generator/optionsScale";
 
+interface Props {
+  setCssValues: StateSetter<CssValues[]>;
+  setOutput: StateSetter<string>;
+  setSecondOutput: StateSetter<string>;
+  cssValues: CssValues[];
+}
+
 const HierarchyGenerator = ({
   setCssValues,
   setOutput,
-}: {
-  setCssValues: StateSetter<CssValues[]>;
-  setOutput: StateSetter<string>;
-}) => {
+  setSecondOutput,
+  cssValues,
+}: Props) => {
   const [newMinBase, setnewMinBase] = useState<number | null>(null);
   const [newMaxBase, setnewMaxBase] = useState<number | null>(null);
   const [realMaxBase, setRealMaxBase] = useState<number | null>(null);
@@ -33,6 +39,19 @@ const HierarchyGenerator = ({
       );
 
       setOutput(fullCss);
+
+      const inclusions = [".big-p", ".normal-p", ".small-p", ".smaller-p"];
+      const variables = ["--text-lg", "--text-base", "--text-sm", "--text-xs"];
+
+      const values = cssValues
+        .filter((item) => inclusions.includes(item.tagName))
+        .map((item) => item.value.replace("font-size:", "").trim());
+
+      const secondOutput = values.map((value, index) => {
+        return `${variables[index]}: ${value}`;
+      });
+
+      setSecondOutput(secondOutput.join("\n\n"));
     }
   }, [canGenerate]);
 
@@ -49,7 +68,7 @@ const HierarchyGenerator = ({
       <OptionsScale scaleValue={scaleValue} setScaleValue={setScaleValue} />
 
       <GenButton
-        title="Gerar"
+        title="Gerar CSS"
         newMinBase={newMinBase}
         realMaxBase={realMaxBase}
         setCanGenerate={setCanGenerate}

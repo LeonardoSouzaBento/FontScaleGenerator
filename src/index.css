@@ -162,7 +162,7 @@
     @apply font-medium text-sm;
   }
   button {
-    @apply font-semibold leading-none;
+    @apply font-semibold leading-none text-base tracking-normal;
   }
   pre {
     @apply text-sm font-normal leading-relaxed;
