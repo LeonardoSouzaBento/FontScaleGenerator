@@ -20,11 +20,11 @@ type CssValues = {
   h6: string;
 };
 
-const TitlesSection = ({ ref }: { ref: React.RefObject<HTMLDivElement> }) => {
+const TitlesSection = ({ props }: { props: { ref: React.RefObject<HTMLDivElement> } }) => {
   const [styles, setStyles] = useState<CssValues>(css);
 
   return (
-    <div ref={ref}>
+    <div ref={props.ref}>
       <h1 className={styles.h1}>Nome Marca</h1>
       <h1 className={styles.h1}>Heading 1 - Título Principal</h1>
       <p className={styles.p}>

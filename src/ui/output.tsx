@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CardContent } from "./card";
+import { Card, CardContent } from "./card";
 import CopyButton from "./copy-button";
 import { secondOutputExample } from "@/data/secondOutputExample";
 import { outputExample } from "@/data/outputExample";
@@ -12,9 +12,11 @@ const css = {
 const Output = ({
   output,
   secondOutput,
+  cardHeight,
 }: {
   output: string;
   secondOutput: string;
+  cardHeight: number;
 }) => {
   const [animate, setAnimate] = useState<boolean>(false);
 
@@ -26,10 +28,10 @@ const Output = ({
   }, [output]);
 
   return (
-    <CardContent
-      className={`animate-in fade-in slide-in-from-bottom-4 relative h-91.5 max-h-full 
-        space-y-3 overflow-y-scroll rounded-lg bg-white pt-5 pr-3 shadow-lg duration-300 
-        hover:shadow-xl ${!output && "border border-gray-100"}`}
+    <Card
+      className={`animate-in fade-in slide-in-from-bottom-4 relative max-h-full 
+      space-y-5 overflow-y-scroll`}
+      style={{ maxHeight: cardHeight || "22rem" }}
     >
       <div className={`relative space-y-4`}>
         <div
@@ -37,21 +39,19 @@ const Output = ({
             transition-all duration-200 ${animate && "bg-white/66 z-2"}`}
         />
         <pre
-          className={`${css.pre} ${!output ? "opacity-50" : "opacity-100"} `}
+          className={`${css.pre} ${!output && "text-neutral-400"} `}
         >
           {output || outputExample}
         </pre>
-        <h6>Variáveis tailwind para tags p</h6>
-        <pre
-          className={`${css.pre} ${
-            !secondOutput ? "opacity-50" : "opacity-100"
-          }`}
-        >
+        <h6 className={`${!output && "text-neutral-400"}`}>
+          Variáveis tailwind para tags p:
+        </h6>
+        <pre className={`${css.pre} ${!output && "text-neutral-400"}`}>
           {secondOutput || secondOutputExample}
         </pre>
       </div>
-      <CopyButton output={output} />
-    </CardContent>
+      <CopyButton output={output} secondOutput={secondOutput}/>
+    </Card>
   );
 };
 

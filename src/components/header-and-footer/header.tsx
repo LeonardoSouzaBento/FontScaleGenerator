@@ -24,9 +24,9 @@ const Header = () => {
         </h1>
         <p
           className={` text-muted-foreground max-w-2xl 
-            mx-auto px-3 sm:text-left sm:pl-1.5 text-lg`}
+            mx-auto px-3 sm:text-left sm:pl-1 text-base`}
         >
-          Gere o CSS de escala tipográfica do seu projeto
+          Gere o CSS de escala tipográfica do seu projeto!
         </p>
       </div>
     </header>

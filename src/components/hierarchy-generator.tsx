@@ -14,10 +14,10 @@ interface Props {
 }
 
 const HierarchyGenerator = ({
+  cssValues,
   setCssValues,
   setOutput,
   setSecondOutput,
-  cssValues,
 }: Props) => {
   const [newMinBase, setnewMinBase] = useState<number | null>(null);
   const [newMaxBase, setnewMaxBase] = useState<number | null>(null);
@@ -39,7 +39,11 @@ const HierarchyGenerator = ({
       );
 
       setOutput(fullCss);
+    }
+  }, [canGenerate]);
 
+  useEffect(() => {
+    if (canGenerate > 0) {
       const inclusions = [".big-p", ".normal-p", ".small-p", ".smaller-p"];
       const variables = ["--text-lg", "--text-base", "--text-sm", "--text-xs"];
 
@@ -53,10 +57,10 @@ const HierarchyGenerator = ({
 
       setSecondOutput(secondOutput.join("\n\n"));
     }
-  }, [canGenerate]);
+  }, [cssValues]);
 
   return (
-    <div className={`flex flex-col gap-5.5`}>
+    <div className={`flex flex-col gap-5`}>
       <Inputs
         newMinBase={newMinBase}
         setnewMinBase={setnewMinBase}

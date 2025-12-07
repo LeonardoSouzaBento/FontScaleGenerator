@@ -7,10 +7,9 @@ export function generateClamp(
   const slope = (maxFont - minFont) / (maxWidth - minWidth);
   const yAxisIntersection = minFont - slope * minWidth;
 
-  const slopeVw = slope * 100;
   const preferred = `calc(${yAxisIntersection.toFixed(
     6
-  )}rem + ${slopeVw.toFixed(6)}vw)`;
+  )}rem + ${(slope * 100).toFixed(6)}vw)`;
 
   return `font-size: clamp(${minFont.toFixed(
     6

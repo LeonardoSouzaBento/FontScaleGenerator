@@ -1,9 +1,11 @@
+import { useResizeWatcher } from "@/hooks/useResizeWatcher";
+import { Card } from "@/ui/card";
 import { useEffect, useRef, useState } from "react";
-import TitlesSection from "./prev/titles-section";
-import ParagraphsSection from "./prev/paragraphs-section";
 import ButtonsSection from "./prev/buttons-section";
 import FormsSection from "./prev/forms-section";
-import { Button } from "@/ui/button";
+import Nav from "./prev/nav";
+import ParagraphsSection from "./prev/paragraphs-section";
+import TitlesSection from "./prev/titles-section";
 
 const sectionsSizesMap = [
   { titles: ["h1", "h2", "h3", "h4", "h5", "h6"] },
@@ -13,22 +15,22 @@ const sectionsSizesMap = [
 ];
 
 const css = {
-  wrapper: `mb-8 mx-auto w-[calc(100%-1.5rem)] max-w-2xl xl:max-w-7xl 
-    bg-white p-6 rounded-lg shadow-lg
-    hover:shadow-xl transition-shadow duration-300`,
-  section: `space-y-5 border border-border rounded-lg p-5`,
+  wrapper: `mb-8 mx-auto w-[calc(100%-1.5rem)] max-w-2xl xl:max-w-7xl`,
+  section: `space-y-5 border-t rounded-none py-4 box-content`,
 };
 
 const Prev = () => {
   const [componentExamples, setComponentExamples] = useState<string[]>([
     "títulos",
-    "paragráfos",
+    "parágrafos",
     "botões",
     "formulários",
   ]);
   const [selectedComponent, setSelectedComponent] = useState<string>("títulos");
   const firstSectionRef = useRef<HTMLDivElement>(null);
   const [firstSectionHeight, setFirstSectionHeight] = useState<number>(0);
+  const [wasResize, setWasResize] = useState<number>();
+  useResizeWatcher(setWasResize);
 
   useEffect(() => {
     if (firstSectionRef.current) {
@@ -36,35 +38,34 @@ const Prev = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (wasResize) {
+      setFirstSectionHeight(firstSectionRef.current.offsetHeight);
+    }
+  }, [wasResize]);
+
   return (
-    <div className={css.wrapper}>
-      <h2 className={`text-muted-foreground leading-none mb-4`}>
-        Prévia
-      </h2>
-      <nav className={`flex gap-3 mb-5`}>
-        {componentExamples.map((item) => (
-          <Button
-            variant="outline"
-            key={item}
-            className={`capitalize ${selectedComponent === item && "ring ring-blue-400/66 shadow-xs"}`}
-            onClick={() => setSelectedComponent(item)}
-          >
-            {item}
-          </Button>
-        ))}
-      </nav>
+    <Card className={css.wrapper}>
+      <div className={`space-y-4 pb-5`}>
+        <h3 className={`text-muted-foreground leading-none`}>Prévia:</h3>
+        <Nav
+          componentExamples={componentExamples}
+          selectedComponent={selectedComponent}
+          setSelectedComponent={setSelectedComponent}
+        />
+      </div>
       <section
         className={css.section}
-        style={{ minHeight: firstSectionHeight || "auto" }}
+        style={{ height: firstSectionHeight || "auto" }}
       >
         {selectedComponent === "títulos" && (
-          <TitlesSection ref={firstSectionRef} />
+          <TitlesSection props={{ ref: firstSectionRef }} />
         )}
-        {selectedComponent === "paragráfos" && <ParagraphsSection />}
+        {selectedComponent === "parágrafos" && <ParagraphsSection />}
         {selectedComponent === "botões" && <ButtonsSection />}
         {selectedComponent === "formulários" && <FormsSection />}
       </section>
-    </div>
+    </Card>
   );
 };
 

@@ -1,12 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@300;400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
 /*primeiro comit*/
 @theme {
+  /* Textos */
   --text-lg: clamp(1.12035rem, calc(1.103202rem + 0.002679vw), 1.144357rem);
   --text-base: 1em;
   --text-sm: clamp(0.984067rem, calc(0.969004rem + 0.002354vw), 1.005155rem);
   --text-xs: clamp(0.922275rem, calc(0.908159rem + 0.002206vw), 0.942038rem);
+
   /* Cores */
   --color-background: hsl(210 20% 98%);
   --color-foreground: hsl(215 25% 15%);
@@ -36,17 +38,16 @@
   --color-input: hsl(214 20% 90%);
   --color-ring: hsl(186 62% 45%);
 
-  /* Radius */
-  --radius-base: 0.75rem;
+  /* Sombras */
+  --shadow-xs: 0 1px 1.5px rgba(0, 0, 0, 0.21);
+  --shadow-sm: 0 2px 3px -1.5px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 4px 6px -3px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 12px -6px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 12px 24px -8px rgba(0, 0, 0, 0.09);
 
   /* Gradientes */
   --color-start: hsl(186 62% 45%);
   --color-end: hsl(172 66% 50%);
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 
   /* Transições */
   --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -93,11 +94,11 @@
   }
   div {
     scrollbar-width: thin;
-    scrollbar-color: oklch(87% 0 0) #ffffff00; /*botão | fundo */
+    scrollbar-color: var(--color-gray-200) #ffffff00; /*botão | fundo */
   }
   body {
     font-family:
-      "Nunito Sans",
+      "Google Sans Flex",
       -apple-system,
       BlinkMacSystemFont,
       "Segoe UI",
@@ -108,7 +109,7 @@
   }
 
   .big-h1 {
-    font-size: clamp(1.892134rem, calc(1.863173rem + 0.004525vw), 1.93268rem);
+    font-size: clamp(1.653256rem, calc(1.619516rem + 0.005272vw), 1.700492rem);
     @apply font-bold leading-none;
   }
 
@@ -159,10 +160,10 @@
   }
 
   label {
-    @apply font-medium text-sm;
+    @apply font-medium text-sm text-card-foreground;
   }
   button {
-    @apply font-semibold leading-none text-base tracking-normal;
+    @apply font-medium leading-none text-base tracking-normal capitalize;
   }
   pre {
     @apply text-sm font-normal leading-relaxed;

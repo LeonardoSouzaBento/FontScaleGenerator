@@ -2,7 +2,7 @@
 const ParagraphsSection = () => {
   return (
     <>
-      <h2>Variações de Parágrafo</h2>
+      <h4>Variações de Parágrafo</h4>
       <p className="p-lg">
         Parágrafo Grande — ideal para introduções, heros ou destaque moderado.
       </p>

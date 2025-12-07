@@ -10,26 +10,27 @@ const OptionsScale = ({
 }) => {
   return (
     <div
-      className={`flex flex-col gap-3 pt-2.5 pb-5 border-t 
+      className={`flex flex-col gap-3 pt-3 pb-5 border-t 
     border-b border-input rounded-none`}
     >
       <label
         htmlFor="scale"
         className={` tracking-wide 
-            text-muted-foreground`}
+            text-card-foreground`}
       >
         Escala tipográfica
       </label>
       <div
-        className={`flex flex-wrap gap-4 rounded-md 
+        className={`flex flex-wrap gap-3 rounded-md 
            text-foreground`}
       >
         {scales.map((item) => (
           <Button
             key={item.value}
             variant="outline"
-            className={`capitalize h-[38px] min-w-20 ${
-              item.value !== scaleValue ? "bg-white" : "ring ring-blue-300 shadow-sm"
+            size="sm"
+            className={`min-w-20 rounded-full ${
+              item.value !== scaleValue ? "bg-white" : "ring ring-ring shadow-sm"
             }`}
             onClick={() => {
               setScaleValue(item.value);

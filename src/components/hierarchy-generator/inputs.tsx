@@ -6,7 +6,7 @@ function deduceFontAt1536px(
   font640: number,
   font1280: number
 ): number {
-  const font1536 = 1.195 * (font1280 - font640) + font640;
+  const font1536 = 1.20 * (font1280 - font640) + font640;
 
   return Number(font1536.toFixed(2));
 }

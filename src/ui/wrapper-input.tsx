@@ -8,10 +8,10 @@ export const WrapperInput = ({
   htmlFor: string;
 }) => {
   return (
-    <div className={`flex flex-col gap-2`}>
+    <div className={`flex flex-col gap-1.5`}>
       <label
         htmlFor={htmlFor}
-        className={`mb-1`}
+        className={`mb-px`}
       >
         {"Tag p " + label}
       </label>

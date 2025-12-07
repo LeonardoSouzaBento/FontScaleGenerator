@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "@/components/header-and-footer/header";
 import HierarchyGenerator from "@/components/hierarchy-generator";
 import Prev from "@/components/prev";
@@ -7,11 +7,28 @@ import { CssValues } from "@/types";
 import { Card, CardContent } from "@/ui/card";
 import Output from "@/ui/output";
 import { outputExample } from "@/data/outputExample";
+import { useResizeWatcher } from "@/hooks/useResizeWatcher";
 
 const Index = () => {
   const [cssValues, setCssValues] = useState<CssValues[]>(defaultCssValues);
   const [output, setOutput] = useState<string>("");
   const [secondOutput, setSecondOutput] = useState<string>("");
+  const [cardHeight, setCardHeight] = useState<number>(0);
+  const [wasResize, setWasResize] = useState<number>();
+  const cardRef = useRef<HTMLDivElement>(null);
+  useResizeWatcher(setWasResize);
+
+  useEffect(() => {
+    if (cardRef.current) {
+      setCardHeight(cardRef.current.offsetHeight);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (wasResize && cardRef.current) {
+      setCardHeight(cardRef.current.offsetHeight);
+    }
+  }, [wasResize]);
 
   return (
     <div className={`min-h-screen py-8`}>
@@ -23,8 +40,8 @@ const Index = () => {
           xl:grid-cols-2 gap-8 relative`}
       >
         <Card
-          className={`w-full h-max min-h-max pt-6 pb-0.5 mx-auto shadow-lg 
-            hover:shadow-xl transition-shadow duration-300`}
+          ref={cardRef}
+          className={`w-full h-max min-h-max mx-auto`}
         >
           <CardContent>
             <HierarchyGenerator
@@ -36,6 +53,7 @@ const Index = () => {
           </CardContent>
         </Card>
         <Output
+          cardHeight={cardHeight}
           output={output}
           secondOutput={secondOutput}
         />

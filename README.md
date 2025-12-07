@@ -1,12 +1,7 @@
-## 🛣️ Objetivo Typographic Scale Generator
+## 🛣️ Oque é e para que serve o Typographic Scale Generator
 
-Criar tamanhos de fonte responsivos de forma profissional, evitando que a diferença de tamanho das tags siga uma hierarquia despadronizada e que a versão de desktop do site tenha tamanhos de fonte muito pequenos.
-.
-
-## 🎯 O que ele oferece ?
-
-- Oferece copiar para área de transferência o CSS com tamanhos responsivos para a maior parte das tags
-  e seguindo a escala escolhida.
+Typographic Scale Generator cria tamanhos de fonte responsivos de forma profissional para que voce.
+Copie para área de transferência o CSS com tamanhos responsivos e tenha tags seguindo uma hierarquia de tamanho padronizada.
 
 #### Exemplo de Saída -
 
@@ -31,44 +26,36 @@ h2 {
 
 ## 🧐 Processo de uso
 
-1. **Defina os tamanhos mínimo e máximo de fonte em pixels**
+1. Defina os tamanhos mínimo e máximo de fonte em pixels
+2. Escolha a escala
+3. Clique em gerar
+4. Copie o código gerado
 
-2. **Escolha a escala**
+## 🧮 Principais processos do algoritmo
 
-3. **Clique em gerar**
-
-4. **Copie o código gerado**
-
-## 🧮 Processo do algoritmo
-
-1. **Extrapolar para 1530px**
-   Os valores de entrada recebidos para min-width 640px e min-width 1280px são usadas para calcular os valor de min-width 1530px com a função `deduceFontAt1530px` que faz
-
+**Extrapolar para 1530px**
+Se 1280 tem 100% da diferença entre os valores minimos e maximo, 1536 tem 120%.
 ```js
-const slope = (font1280 - font640) / (midWidth - minWidth);
-const font1530 = font640 + slope \* (targetWidth - minWidth);
-
-return Number(font1530.toFixed(2));
+const font1536 = 1.2 * (font1280 - font640) + font640;
 ```
 
-2. **Converter para em e chamar scaleSizesAndReturn**
+**Converter para em**
 
 ```js
 const minEm = newMinBase / 16;
 const maxEm = realMaxBase / 16;
-
-const fullCss = scaleSizesAndReturn(minEm, maxEm, scaleValue);
-setOutput(fullCss);
 ```
 
 3. **Receber os dados**
 
 Usamos um objeto como esse:
+
 ```js
 const item = { tagName: ".normal-p", minSize: 0, maxSize: 0, pow: 0 };
 ```
 
 Pow é o fator de potencia:
+
 ```js
 { tagName: "h4", ... pow: 3 }, // tamanho base * escala * escala * escala
 { tagName: "h5", ... pow: 2 }, // tamanho base * escala * escala
@@ -76,31 +63,31 @@ Pow é o fator de potencia:
 { tagName: ".normal-p", ... pow: 0, }, // tamanho base (recebido)
 ```
 
-4. **Função final: scaleSizesAndReturn**
+4. **Funções que cauculam os valores**
 
 ```js
-// Gerar os valores escalados
-const scaledList = sizes.map((item) => {
-  return {
-    ...item,
-    minSize: Number((minSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)),
-    maxSize: Number((maxSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)),
+// Gerar para o body
+  const breakpoints: string[] = ["", "sm", "md", "lg", "xl", "2xl"];
+
+  const calcFontSize = (index: number) => {
+    // 0, 640, 768, 1024, 1280, 1536
+    const proportions: number[] = [0, 0.5, 0.6, 0.8, 1, 1.2];
+    const size = proportions[index] * (font1280 - minFontSize) + minFontSize;
+    return `${size}`;
   };
-});
 
-// Formatar o CSS
-const formattedCSS = scaledList
-  .map(({ tagName, minSize, maxSize }) => {
-    if (tagName === ".normal-p")
-      return `${tagName} {\n  font-size: 1em;\n}`;
-    else {
-      const clamp = generateClampEm(minSize, maxSize);
-      return `${tagName} {\n  ${clamp}\n}`;
-    }
-  })
-  .join("\n\n");
+// Gerar o clamp individual
+const slope = (maxFont - minFont) / (maxWidth - minWidth);
+  const yAxisIntersection = minFont - slope * minWidth;
 
-return formattedCSS;
+  const slopeVw = slope * 100;
+  const preferred = `calc(${yAxisIntersection.toFixed(
+    6
+  )}rem + ${slopeVw.toFixed(6)}vw)`;
+
+  return `font-size: clamp(${minFont.toFixed(
+    6
+  )}rem, ${preferred}, ${maxFont.toFixed(6)}rem);`;
 ```
 
 ## 🛠️ Tecnologias Utilizadas

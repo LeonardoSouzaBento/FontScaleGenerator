@@ -1,7 +1,7 @@
 const FormsSection = () => {
   return (
     <>
-      <h2>Formulário de Teste</h2>
+      <h4>Formulários</h4>
       <form>
         <label htmlFor="nome">Nome</label>
         <input id="nome" type="text" placeholder="Digite seu nome" />

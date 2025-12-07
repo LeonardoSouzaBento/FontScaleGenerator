@@ -1,7 +1,7 @@
 const ButtonsSection = () => {
   return (
     <>
-      <h2>Botões em Escala</h2>
+      <h4>Botões em escala</h4>
       <button className="btn-lg">Botão Grande</button>
       <button className="btn-md">Botão Médio</button>
       <button className="btn-sm">Botão Pequeno</button>
