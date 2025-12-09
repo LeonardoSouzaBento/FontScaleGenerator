@@ -1,5 +1,5 @@
 import { Button } from "@/ui/button";
-import { scales } from "@/data/scaleVars";
+import { scales } from "@/data/variables";
 
 const OptionsScale = ({
   scaleValue,
@@ -30,7 +30,9 @@ const OptionsScale = ({
             variant="outline"
             size="sm"
             className={`min-w-20 rounded-full ${
-              item.value !== scaleValue ? "bg-white" : "ring ring-ring shadow-sm"
+              item.value !== scaleValue
+                ? "bg-white"
+                : "ring ring-ring shadow-sm"
             }`}
             onClick={() => {
               setScaleValue(item.value);

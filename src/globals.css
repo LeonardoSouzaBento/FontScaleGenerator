@@ -1,14 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@300;400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
-/*primeiro comit*/
 @theme {
-  /* Textos */
-  --text-lg: clamp(1.12035rem, calc(1.103202rem + 0.002679vw), 1.144357rem);
-  --text-base: 1em;
-  --text-sm: clamp(0.984067rem, calc(0.969004rem + 0.002354vw), 1.005155rem);
-  --text-xs: clamp(0.922275rem, calc(0.908159rem + 0.002206vw), 0.942038rem);
-
   /* Cores */
   --color-background: hsl(210 20% 98%);
   --color-foreground: hsl(215 25% 15%);
@@ -84,10 +77,15 @@
   --color-ring: hsl(186 62% 55%);
 }
 
+html {
+  font-size: 16px;
+}
+
 @layer base {
   * {
     @apply border-border;
   }
+
   div::-webkit-scrollbar-thumb {
     background: oklch(87% 0 0);
     border-radius: 6px;
@@ -104,68 +102,13 @@
       "Segoe UI",
       sans-serif;
     @apply text-gray-800 bg-linear-to-br from-[#f9fafb00] to-[#f3f5f7] 
-    text-[1.05000rem] sm:text-[1.05938rem] md:text-[1.06125rem] lg:text-[1.06500rem] 
-    xl:text-[1.06875rem] 2xl:text-[1.07250rem] leading-normal;
+    text-[1.05000em] sm:text-[1.05938em] md:text-[1.06125em] lg:text-[1.06500em] 
+    xl:text-[1.06875em] 2xl:text-[1.07250em] leading-normal;
   }
+}
 
-  .big-h1 {
-    font-size: clamp(1.653256rem, calc(1.619516rem + 0.005272vw), 1.700492rem);
-    @apply font-bold leading-none;
-  }
-
-  h1 {
-    font-size: clamp(1.549444rem, calc(1.525728rem + 0.003706vw), 1.582646rem);
-    @apply font-bold;
-  }
-
-  h2 {
-    font-size: clamp(1.45215rem, calc(1.429924rem + 0.003473vw), 1.483267rem);
-    @apply font-semibold;
-  }
-
-  h3 {
-    font-size: clamp(1.360965rem, calc(1.340134rem + 0.003255vw), 1.390129rem);
-    @apply font-semibold;
-  }
-
-  h4 {
-    font-size: clamp(1.275506rem, calc(1.255983rem + 0.00305vw), 1.302838rem);
-    @apply font-medium;
-  }
-
-  h5 {
-    font-size: clamp(1.195413rem, calc(1.177116rem + 0.002859vw), 1.221029rem);
-    @apply font-medium;
-  }
-
-  h6 {
-    font-size: clamp(1.12035rem, calc(1.103202rem + 0.002679vw), 1.144357rem);
-    @apply font-normal;
-  }
-
-  .big-p {
-    font-size: clamp(1.12035rem, calc(1.103202rem + 0.002679vw), 1.144357rem);
-  }
-
-  .normal-p {
-    font-size: 1em;
-  }
-
-  .small-p {
-    font-size: clamp(0.984067rem, calc(0.969004rem + 0.002354vw), 1.005155rem);
-  }
-
-  .smaller-p {
-    font-size: clamp(0.922275rem, calc(0.908159rem + 0.002206vw), 0.942038rem);
-  }
-
-  label {
-    @apply font-medium text-sm text-card-foreground;
-  }
-  button {
-    @apply font-medium leading-none text-base tracking-normal capitalize;
-  }
-  pre {
-    @apply text-sm font-normal leading-relaxed;
+@layer components {
+  * {
+    @apply border-border;
   }
 }

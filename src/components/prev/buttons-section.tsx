@@ -1,4 +1,6 @@
-const ButtonsSection = () => {
+import { ClampValue } from "@/types";
+
+const ButtonsSection = ({clampValues}: {clampValues: ClampValue}) => {
   return (
     <>
       <h4>Botões em escala</h4>

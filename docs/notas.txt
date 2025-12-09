@@ -1,14 +1,14 @@
 
 Seção de perguntas e respostas
 
+Porque rem é a melhor medida?
+
+
 Porque definir a fonte até 640px?
-breakpoints muito baixos como 320px ou 375px, são úteis para telefones muito antigos e de baixa resolução (como o iPhone original, que tinha 320px de largura). Hoje em dia, quase todos os smartphones modernos têm uma largura de tela maior que 375px.
-Alem de você precisa de menos media queries
+Primeiro porque definir a mesma fonte para até 640px garante que a fonte fique bem legível em telefones pequenos.
+Depois porque hoje em dia quase todos os smartphones modernos têm uma largura de tela maior que 375px. 
+Além disso, assim precisa de menos media queries, um detalhe com alguma importância.
 
-O que é o estilo 
+Porque não usar clamp? 
+Funções clamps não funcionam sem fornecer um valor absoluto na função calc. Tente usar o clamp a seguir (que usa uma medida relativa no calc), e veja o resultado: "clamp(1rem, calc(0.999349rem + 0.065147vw), 2rem)". Não funciona. Esse outro clamp funciona: "clamp(1.125rem, calc(13.685393px + 0.674157vw), 1.5rem)", mas como a medida precisar estar em pixels é ruim para a acessibilidade.
 
-Novas funcionalidades
-
-Mostrar uma prévia.
-
-Fontes de referencia: Bebas Neue ou Oswald

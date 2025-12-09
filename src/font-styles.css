@@ -1,0 +1,83 @@
+@import "tailwindcss";
+@import "./globals.css";
+
+@layer components {
+  body {
+    @apply text-[1.05000rem] sm:text-[1.06250rem] md:text-[1.06500rem] lg:text-[1.07000rem] 
+    xl:text-[1.07500rem] 2xl:text-[1.08000rem];
+  }
+
+  .big-h1 {
+    @apply text-[1.65326rem] sm:text-[1.67294rem] md:text-[1.67687rem] lg:text-[1.68475rem] 
+    xl:text-[1.69262rem] 2xl:text-[1.70049rem] font-bold leading-none;
+  }
+
+  h1 {
+    @apply text-[1.54944rem] sm:text-[1.56789rem] md:text-[1.57158rem] lg:text-[1.57896rem] 
+    xl:text-[1.58634rem] 2xl:text-[1.59371rem] font-bold;
+  }
+
+  h2 {
+    @apply text-[1.45215rem] sm:text-[1.46944rem] md:text-[1.47290rem] lg:text-[1.47981rem] 
+    xl:text-[1.48673rem] 2xl:text-[1.49364rem] font-semibold;
+  }
+
+  h3 {
+    @apply text-[1.36096rem] sm:text-[1.37717rem] md:text-[1.38041rem] lg:text-[1.38689rem] 
+    xl:text-[1.39337rem] 2xl:text-[1.39985rem] font-medium;
+  }
+
+  h4 {
+    @apply text-[1.27551rem] sm:text-[1.29069rem] md:text-[1.29373rem] lg:text-[1.29980rem] 
+    xl:text-[1.30587rem] 2xl:text-[1.31195rem] font-medium;
+  }
+
+  h5 {
+    @apply text-[1.19541rem] sm:text-[1.20964rem] md:text-[1.21249rem] lg:text-[1.21818rem]
+    xl:text-[1.22388rem] 2xl:text-[1.22957rem] font-medium;
+  }
+
+  h6 {
+    @apply text-[1.12035rem] sm:text-[1.13369rem] md:text-[1.13636rem] lg:text-[1.14169rem] 
+    xl:text-[1.14702rem] 2xl:text-[1.15236rem] font-normal;
+  }
+
+  .large-text {
+    @apply text-[1.12035rem] sm:text-[1.13369rem] md:text-[1.13636rem] lg:text-[1.14169rem] 
+    xl:text-[1.14702rem] 2xl:text-[1.15236rem];
+  }
+
+  .normal-text {
+    @apply text-[1.05000rem] sm:text-[1.06250rem] md:text-[1.06500rem] lg:text-[1.07000rem] 
+    xl:text-[1.07500rem] 2xl:text-[1.08000rem];
+  }
+
+  .small-text {
+    @apply text-[0.98407rem] sm:text-[0.99578rem] md:text-[0.99813rem] lg:text-[1.00281rem] 
+    xl:text-[1.00750rem] 2xl:text-[1.01218rem];
+  }
+
+  .smaller-text {
+    @apply text-[0.92227rem] sm:text-[0.93325rem] md:text-[0.93545rem] lg:text-[0.93984rem] 
+    xl:text-[0.94423rem] 2xl:text-[0.94863rem];
+  }
+
+  label {
+    @apply text-[0.98407rem] sm:text-[0.99578rem] 
+    md:text-[0.99813rem] lg:text-[1.00281rem] xl:text-[1.00750rem] 2xl:text-[1.01218rem];
+  }
+}
+
+/* Pesos cores e line-height */
+@layer components {
+  label {
+    @apply font-medium text-card-foreground;
+  }
+  button {
+    @apply font-medium leading-none tracking-normal capitalize;
+  }
+  pre {
+    @apply font-light leading-relaxed;
+  }
+}
+

@@ -1,5 +1,6 @@
+import { ClampValue } from "@/types";
 
-const ParagraphsSection = () => {
+const ParagraphsSection = ({clampValues}: {clampValues: ClampValue}) => {
   return (
     <>
       <h4>Variações de Parágrafo</h4>

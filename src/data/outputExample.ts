@@ -1,48 +1,47 @@
 export const outputExample = `body {
-   @apply text-[1.09375rem] sm:text-[1.12500rem] md:text-[1.13125rem] 
-   lg:text-[1.14375rem] xl:text-[1.15625rem] 2xl:text-[1.16875rem];
+ @apply text-[1.09375rem] sm:text-[1.12500rem] md:text-[1.13125rem] lg:text-[1.14375rem] xl:text-[1.15625rem] 2xl:text-[1.16875rem]
 }
 
 .big-h1 {
-  font-size: clamp(1.722142em, calc(1.585355em + 0.021373vw), 1.858929em);
+ @apply text-[1.72214rem] sm:text-[1.77135rem] md:text-[1.78119rem] lg:text-[1.80087rem] xl:text-[1.82055rem] 2xl:text-[1.84023rem]
 }
 
 h1 {
-  font-size: clamp(1.614004em, calc(1.485806em + 0.020031vw), 1.742202em);
+ @apply text-[1.61400rem] sm:text-[1.66012rem] md:text-[1.66934rem] lg:text-[1.68779rem] xl:text-[1.70623rem] 2xl:text-[1.72468rem]
 }
 
 h2 {
-  font-size: clamp(1.512656em, calc(1.392508em + 0.018773vw), 1.632804em);
+ @apply text-[1.51266rem] sm:text-[1.55587rem] md:text-[1.56452rem] lg:text-[1.58181rem] xl:text-[1.59909rem] 2xl:text-[1.61638rem]
 }
 
 h3 {
-  font-size: clamp(1.417672em, calc(1.305068em + 0.017594vw), 1.530276em);
+ @apply text-[1.41767rem] sm:text-[1.45818rem] md:text-[1.46628rem] lg:text-[1.48248rem] xl:text-[1.49868rem] 2xl:text-[1.51488rem]
 }
 
 h4 {
-  font-size: clamp(1.328652em, calc(1.223119em + 0.016490vw), 1.434185em);
+ @apply text-[1.32865rem] sm:text-[1.36661rem] md:text-[1.37421rem] lg:text-[1.38939rem] xl:text-[1.40457rem] 2xl:text-[1.41976rem]
 }
 
 h5 {
-  font-size: clamp(1.245222em, calc(1.146315em + 0.015454vw), 1.344129em);
+ @apply text-[1.24522rem] sm:text-[1.28080rem] md:text-[1.28792rem] lg:text-[1.30215rem] xl:text-[1.31638rem] 2xl:text-[1.33061rem]
 }
 
 h6 {
-  font-size: clamp(1.167031em, calc(1.074335em + 0.014484vw), 1.259727em);
+ @apply text-[1.16703rem] sm:text-[1.20037rem] md:text-[1.20704rem] lg:text-[1.22038rem] xl:text-[1.23372rem] 2xl:text-[1.24706rem]
 }
 
-.big-p {
-  font-size: clamp(1.167031em, calc(1.074335em + 0.014484vw), 1.259727em);
+.large-text {
+ @apply text-[1.16703rem] sm:text-[1.20037rem] md:text-[1.20704rem] lg:text-[1.22038rem] xl:text-[1.23372rem] 2xl:text-[1.24706rem]
 }
 
-.normal-p {
-  font-size: 1.00em;
+.normal-text {
+ @apply text-[1.09375rem] sm:text-[1.12500rem] md:text-[1.13125rem] lg:text-[1.14375rem] xl:text-[1.15625rem] 2xl:text-[1.16875rem]
 }
 
-.small-p {
-  font-size: clamp(1.025070em, calc(0.943650em + 0.012722vw), 1.106490em);
+.small-text {
+ @apply text-[1.02507rem] sm:text-[1.05436rem] md:text-[1.06022rem] lg:text-[1.07193rem] xl:text-[1.08365rem] 2xl:text-[1.09536rem]
 }
 
-.smaller-p {
-  font-size: clamp(0.960703em, calc(0.884396em + 0.011923vw), 1.037010em);
+.smaller-text {
+ @apply text-[0.96070rem] sm:text-[0.98815rem] md:text-[0.99364rem] lg:text-[1.00462rem] xl:text-[1.01560rem] 2xl:text-[1.02658rem]
 }`;

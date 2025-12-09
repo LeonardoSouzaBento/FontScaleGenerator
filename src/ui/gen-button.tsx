@@ -5,23 +5,23 @@ import { Button } from "./button";
 interface GenButtonProps {
   title: string;
   newMinBase: number;
-  realMaxBase: number;
+  newMaxBase: number;
   setCanGenerate: StateSetter<number>;
 }
 
 const GenButton = ({
   title,
   newMinBase,
-  realMaxBase,
+  newMaxBase,
   setCanGenerate,
 }: GenButtonProps) => {
   const [warn, setWarn] = useState<string>("");
 
   const minEm = newMinBase / 16;
-  const maxEm = realMaxBase / newMinBase;
+  const maxEm = newMaxBase / 16;
 
   const handleClick = () => {
-    if (!newMinBase || !realMaxBase) {
+    if (!newMinBase || !newMaxBase) {
       setWarn("Valores ausentes!");
       setTimeout(() => setWarn(""), 2200);
       return;
@@ -36,7 +36,7 @@ const GenButton = ({
         className={`w-full min-h-10 flex-1 bg-linear-to-r from-primary to-end
             hover:opacity-90 transition-all duration-200 hover:scale-[1.02]
             tracking-normal ${
-              !newMinBase || !realMaxBase
+              !newMinBase || !newMaxBase
                 ? "opacity-66 grayscale-100 cursor-not-allowed"
                 : ""
             }`}

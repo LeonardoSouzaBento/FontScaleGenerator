@@ -5,22 +5,21 @@ import { toast } from "sonner";
 
 interface CopyButtonProps {
   output: string;
-  secondOutput: string;
 }
 
 const buttonCSS = `min-h-10.5 w-full transition-all duration-200 
 hover:scale-[1.02] bg-white shadow-sm hover:bg-white
 hover:shadow-md border`;
 
-const iconStyle = {strokeWidth: 2.4, size: 22}
+const iconStyle = {strokeWidth: 2.3, size: "1.125rem"}
 
-const CopyButton = ({ output, secondOutput }: CopyButtonProps) => {
+const CopyButton = ({ output }: CopyButtonProps) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
-    if (!output || !secondOutput) return;
+    if (!output) return;
     try {
-      await navigator.clipboard.writeText(output + "\n\n" + secondOutput);
+      await navigator.clipboard.writeText(output);
       setCopied(true);
       toast.success("Copiado para área de transferência!");
       setTimeout(() => setCopied(false), 2000);
@@ -37,7 +36,7 @@ const CopyButton = ({ output, secondOutput }: CopyButtonProps) => {
         className={`${buttonCSS} ${!output && "grayscale-100"}`}
       >
         <div className={`h-full min-w-max flex items-center 
-          justify-center gap-3.5 ${!output && "text-gray-500"}`}>
+          justify-center gap-2.5 ${!output && "text-gray-500"}`}>
           {copied ? (
             <>
               <Check {...iconStyle}/>

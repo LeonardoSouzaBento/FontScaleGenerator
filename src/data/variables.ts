@@ -9,10 +9,10 @@ export const sizes: SizeHierarchy[] = [
   { tagName: "h4", pow: 3 },
   { tagName: "h5", pow: 2 },
   { tagName: "h6", pow: 1 },
-  { tagName: ".big-p", pow: 1 },
-  { tagName: ".normal-p", pow: 0 },
-  { tagName: ".small-p", pow: -1 },
-  { tagName: ".smaller-p", pow: -2 },
+  { tagName: ".large-text", pow: 1 },
+  { tagName: ".normal-text", pow: 0 },
+  { tagName: ".small-text", pow: -1 },
+  { tagName: ".smaller-text", pow: -2 },
 ];
 
 export const defaultCssValues: CssValues[] = sizes.map((item) => {

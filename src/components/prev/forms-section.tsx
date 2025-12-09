@@ -1,4 +1,6 @@
-const FormsSection = () => {
+import { ClampValue } from "@/types";
+
+const FormsSection = ({clampValues}: {clampValues: ClampValue}) => {
   return (
     <>
       <h4>Formulários</h4>

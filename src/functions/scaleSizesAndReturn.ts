@@ -1,57 +1,30 @@
-import { sizes } from "@/data/scaleVars";
+import { sizes } from "@/data/variables";
 import { CssValues, ScaledList, StateSetter } from "@/types";
-import { generateClamp } from "./scaleSizesAndReturn/genClamp";
-import { genBodySizes } from "./scaleSizesAndReturn/genBodySizes";
+import { genFontSizeScale } from "./scaleSizesAndReturn/genFontSizeScale";
 
-function buildClampTable(
+function buildCSSTable(
   scaledList: ScaledList[],
-  minSizeBody: number,
-  font1280: number
 ): CssValues[] {
   const table: CssValues[] = [];
 
   scaledList.forEach(({ tagName, minSize, maxSize }) => {
-    if (tagName === "body") {
-      const css = genBodySizes(minSizeBody, font1280);
-      table.push({ tagName, value: css });
+    if (tagName === "#root") {
+      table.push({ tagName, value: "font-size: 1.00rem;" });
     } else if (tagName === ".normal-p") {
       table.push({ tagName, value: "font-size: 1.00em;" });
     } else {
-      table.push({ tagName, value: generateClamp(minSize, maxSize) });
+      table.push({ tagName, value: genFontSizeScale(minSize, maxSize) });
     }
   });
 
   return table;
 }
 
-function formatCSS(
-  scaledList: ScaledList[],
-  minSizeBody: number,
-  font1280: number
-): string {
-  return scaledList
-    .map(({ tagName, minSize, maxSize }) => {
-      if (tagName === "body") {
-        const css = genBodySizes(minSizeBody, font1280);
-        return `${tagName} {\n  @apply ${css};\n}`;
-      }
-
-      if (tagName === ".normal-p") {
-        return `${tagName} {\n  font-size: 1.00em;\n}`;
-      }
-
-      const clamp = generateClamp(minSize, maxSize);
-      return `${tagName} {\n  ${clamp}\n}`;
-    })
-    .join("\n\n");
-}
-
 export function scaleSizesAndReturn(
   minSizeBody: number,
   maxSizeBody: number,
   scaleValue: number,
-  font1280: number,
-  setCssValues: StateSetter<CssValues[]>
+  setScaledList: StateSetter<ScaledList[]>,
 ): string {
   const scaledList = sizes.map((item) => {
     return {
@@ -64,11 +37,11 @@ export function scaleSizesAndReturn(
       ),
     };
   });
+  setScaledList(scaledList);
 
-  const clampTable = buildClampTable(scaledList, minSizeBody, font1280);
-  const formattedCSS = formatCSS(scaledList, minSizeBody, font1280);
+  const CSSTable = buildCSSTable(scaledList);
 
-  setCssValues(clampTable);
-
-  return formattedCSS;
+  return `@layer components {\n${CSSTable.map(({ tagName, value }) => {
+    return `${tagName} {\n@apply ${value}\n}`;
+  }).join("\n\n")} \n}`;
 }

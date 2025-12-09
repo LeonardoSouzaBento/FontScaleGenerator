@@ -1,18 +1,18 @@
-import { useEffect, useRef, useState } from "react";
 import Header from "@/components/header-and-footer/header";
 import HierarchyGenerator from "@/components/hierarchy-generator";
 import Prev from "@/components/prev";
-import { defaultCssValues } from "@/data/scaleVars";
-import { CssValues } from "@/types";
+import RelevantQuestions from "@/components/RelevantQuestions";
+import { useResizeWatcher } from "@/hooks/useResizeWatcher";
+import { ClampValue } from "@/types";
 import { Card, CardContent } from "@/ui/card";
 import Output from "@/ui/output";
-import { outputExample } from "@/data/outputExample";
-import { useResizeWatcher } from "@/hooks/useResizeWatcher";
+import { useEffect, useRef, useState } from "react";
+
+const mainCss = `h-max pb-8 px-3 sm:px-6 max-w-2xl xl:max-w-7xl mx-auto box-content`;
 
 const Index = () => {
-  const [cssValues, setCssValues] = useState<CssValues[]>(defaultCssValues);
+  const [clampValues, setClampValues] = useState<ClampValue>({});
   const [output, setOutput] = useState<string>("");
-  const [secondOutput, setSecondOutput] = useState<string>("");
   const [cardHeight, setCardHeight] = useState<number>(0);
   const [wasResize, setWasResize] = useState<number>();
   const cardRef = useRef<HTMLDivElement>(null);
@@ -35,31 +35,25 @@ const Index = () => {
       <Header />
 
       <main
-        className={`h-max pb-8 px-3 sm:px-6 max-w-2xl xl:max-h-96 xl:max-w-7xl mx-auto box-content  
-          overflow-hidden grid grid-rows-[auto, auto] xl:grid-rows-1 
+        className={`${mainCss}
+          overflow-hidden grid grid-rows-2 xl:grid-rows-1 
           xl:grid-cols-2 gap-8 relative`}
       >
-        <Card
-          ref={cardRef}
-          className={`w-full h-max min-h-max mx-auto`}
-        >
+        <Card ref={cardRef} className={`w-full h-max min-h-max mx-auto`}>
           <CardContent>
             <HierarchyGenerator
-              setCssValues={setCssValues}
               setOutput={setOutput}
-              setSecondOutput={setSecondOutput}
-              cssValues={cssValues}
+              setClampValues={setClampValues}
             />
           </CardContent>
         </Card>
-        <Output
-          cardHeight={cardHeight}
-          output={output}
-          secondOutput={secondOutput}
-        />
+        <Output cardHeight={cardHeight} output={output} />
       </main>
 
-      <Prev />
+      <div className={`${mainCss}`}>
+        <Prev clampValues={clampValues} />
+        <RelevantQuestions />
+      </div>
 
       <footer
         className={`text-center  text-muted-foreground animate-in fade-in duration-1000`}

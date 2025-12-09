@@ -14,6 +14,8 @@ export interface ScaledList {
   maxSize: number;
 }
 
+export type ClampValue = Record<string, string>;
+
 export interface CssValues {
   tagName: string;
   value: string;

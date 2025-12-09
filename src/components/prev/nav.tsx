@@ -1,4 +1,5 @@
 import { Button } from "@/ui/button";
+import { componentExamples } from "../prev";
 
 const css = {
   button: `rounded-full`,
@@ -6,11 +7,9 @@ const css = {
 };
 
 const Nav = ({
-  componentExamples,
   selectedComponent,
   setSelectedComponent,
 }: {
-  componentExamples: string[];
   selectedComponent: string;
   setSelectedComponent: (value: string) => void;
 }) => {
