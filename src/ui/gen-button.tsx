@@ -4,47 +4,36 @@ import { Button } from "./button";
 
 interface GenButtonProps {
   title: string;
-  newMinBase: number;
-  newMaxBase: number;
   setCanGenerate: StateSetter<number>;
+  disabled: boolean;
 }
 
-const GenButton = ({
-  title,
-  newMinBase,
-  newMaxBase,
-  setCanGenerate,
-}: GenButtonProps) => {
+const disableCSS = `opacity-40 grayscale-100 cursor-not-allowed`;
+const warnCSS = `text-destructive-foreground bg-destructive!`;
+
+const GenButton = ({ title, setCanGenerate, disabled }: GenButtonProps) => {
   const [warn, setWarn] = useState<string>("");
 
-  const minEm = newMinBase / 16;
-  const maxEm = newMaxBase / 16;
-
   const handleClick = () => {
-    if (!newMinBase || !newMaxBase) {
+    if (disabled) {
       setWarn("Valores ausentes!");
       setTimeout(() => setWarn(""), 2200);
       return;
     }
-    setCanGenerate(prev => prev + 1);
+    setCanGenerate((prev) => prev + 1);
   };
 
   return (
     <div>
+      {/* {warn && <p className={`w-full text-center ${warnCSS} mb-2`}>{warn}</p>} */}
       <Button
         onClick={handleClick}
-        className={`w-full min-h-10 flex-1 bg-linear-to-r from-primary to-end
+        className={`w-full min-h-10 flex-1
             hover:opacity-90 transition-all duration-200 hover:scale-[1.02]
-            tracking-normal ${
-              !newMinBase || !newMaxBase
-                ? "opacity-66 grayscale-100 cursor-not-allowed"
-                : ""
-            }`}
+            tracking-normal ${disabled && !warn && disableCSS} ${warn && warnCSS}`}
       >
-        {title}
+        {warn ? "Valores ausentes!" : title}
       </Button>
-
-      {warn && <p className={`w-full mb-0 text-center text-destructive mt-2`}>{warn}</p>}
     </div>
   );
 };

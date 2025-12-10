@@ -3,7 +3,7 @@ import { componentExamples } from "../prev";
 
 const css = {
   button: `rounded-full`,
-  selectedButton: `ring ring-ring shadow-xs`,
+  selectedButton: `ring ring-accent shadow-xs text-primary`,
 };
 
 const Nav = ({

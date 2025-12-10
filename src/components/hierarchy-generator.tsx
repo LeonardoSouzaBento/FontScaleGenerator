@@ -10,6 +10,8 @@ import { generateClamp } from "@/functions/scaleSizesAndReturn/genClamp";
 interface Props {
   setOutput: StateSetter<string>;
   setClampValues: StateSetter<ClampValue>;
+  disabled: boolean;
+  setDisabled: StateSetter<boolean>;
 }
 
 function deduceFontAt1536px(font640: number, font1280: number): number {
@@ -18,7 +20,12 @@ function deduceFontAt1536px(font640: number, font1280: number): number {
   return Number(font1536.toFixed(2));
 }
 
-const HierarchyGenerator = ({ setOutput, setClampValues }: Props) => {
+const HierarchyGenerator = ({
+  setOutput,
+  setClampValues,
+  disabled,
+  setDisabled,
+}: Props) => {
   const [newMinBase, setnewMinBase] = useState<number | null>(null);
   const [newMaxBase, setnewMaxBase] = useState<number | null>(null);
   const [scaleValue, setScaleValue] = useState<number>(scales[0].value);
@@ -49,16 +56,19 @@ const HierarchyGenerator = ({ setOutput, setClampValues }: Props) => {
         maxSize: deduceFontAt1536px(item.minSize, item.maxSize) * 16,
       };
     });
-    const clampTable = valuesInPx.reduce(
-      (acc, item) => {
-        acc[item.tagName] = generateClamp(item.minSize, item.maxSize);
-        return acc;
-      },
-      {} as ClampValue
-    );
+    const clampTable = valuesInPx.reduce((acc, item) => {
+      acc[item.tagName] = generateClamp(item.minSize, item.maxSize);
+      return acc;
+    }, {} as ClampValue);
 
     setClampValues(clampTable);
   }, [scaledList]);
+
+  useEffect(() => {
+    setDisabled(
+      !newMinBase || !newMaxBase || newMinBase.toString().length < 2 || newMaxBase.toString().length < 2
+    );
+  }, [newMinBase, newMaxBase]);
 
   return (
     <div className={`flex flex-col gap-5`}>
@@ -74,9 +84,8 @@ const HierarchyGenerator = ({ setOutput, setClampValues }: Props) => {
 
       <GenButton
         title="Gerar CSS"
-        newMinBase={newMinBase}
-        newMaxBase={newMaxBase}
         setCanGenerate={setCanGenerate}
+        disabled={disabled}
       />
     </div>
   );

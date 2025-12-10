@@ -1,4 +1,5 @@
-import Header from "@/components/header-and-footer/header";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import HierarchyGenerator from "@/components/hierarchy-generator";
 import Prev from "@/components/prev";
 import PersonalGuidelines from "@/components/prev/personal-guidelines";
@@ -14,6 +15,7 @@ const mainCss = `h-max px-3 sm:px-6 max-w-2xl xl:max-w-7xl mx-auto box-content`;
 const Index = () => {
   const [clampValues, setClampValues] = useState<ClampValue>({});
   const [output, setOutput] = useState<string>("");
+  const [disabled, setDisabled] = useState<boolean>(false);
   const [cardHeight, setCardHeight] = useState<number>(0);
   const [wasResize, setWasResize] = useState<number>();
   const cardRef = useRef<HTMLDivElement>(null);
@@ -45,10 +47,12 @@ const Index = () => {
             <HierarchyGenerator
               setOutput={setOutput}
               setClampValues={setClampValues}
+              disabled={disabled}
+              setDisabled={setDisabled}
             />
           </CardContent>
         </Card>
-        <Output cardHeight={cardHeight} output={output} />
+        <Output cardHeight={cardHeight} output={output} disabled={disabled}/>
       </main>
 
       <div className={`${mainCss} mb-8`}>
@@ -59,11 +63,7 @@ const Index = () => {
         </div>
       </div>
 
-      <footer
-        className={`text-center  text-muted-foreground animate-in fade-in duration-1000`}
-      >
-        <p>Desenvolvido com React, TypeScript e Tailwind CSS</p>
-      </footer>
+     <Footer />
     </div>
   );
 };

@@ -1,12 +1,12 @@
+import { useState } from "react";
 import { Button } from "@/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
 
 const questions = [
   {
     question: `Porque não usar clamps?`,
-    answer: `Estamos usando funções clamp em todas as tags do componente de prévia. No entanto, funções clamp não funcionam sem o fornecimento de um valor absoluto dentro da função calc interna. Tente usar o clamp a seguir e veja o resultado: "clamp(1rem, calc(0.999349rem + 0.065147vw), 2rem)". Não funciona. Esse outro clamp funciona porque tem um valor em px dentro do calc: "clamp(1.125rem, calc(13.685393px + 0.674157vw), 1.5rem)". Essa necessidade de ter valores em pixels é ruim para a acessibilidade.`,
+    answer: `Estamos usando funções clamp em todas as tags do componente de prévia. No entanto, funções clamp não funcionam sem o fornecimento de um valor absoluto dentro da função calc interna. Tente usar o clamp a seguir e veja o resultado: 'clamp(1rem, calc(0.999rem + 0.0651vw), 2rem)'. Não funciona. Precisa ter um valor em pixels dentro do calc: 'clamp(1rem, calc(15.98px + 0.0651vw), 2rem)'. Essa necessidade de ter valores em pixels é ruim para a acessibilidade.`,
   },
   {
     question: `Porque definir o mesmo tamanho de fonte até 640px?`,

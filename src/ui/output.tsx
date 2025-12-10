@@ -9,14 +9,16 @@ const css = {
 };
 
 const Output = ({
+  disabled,
   output,
   cardHeight,
 }: {
+  disabled: boolean;
   output: string;
   cardHeight: number;
 }) => {
   const [animate, setAnimate] = useState<boolean>(false);
-  
+
   useEffect(() => {
     setAnimate(true);
     setTimeout(() => {
@@ -35,13 +37,11 @@ const Output = ({
           className={`absolute top-0 -z-1 left-0 size-full rounded-md bg-transparent 
             transition-all duration-200 ${animate && "bg-white/66 z-2"}`}
         />
-        <pre
-          className={`${css.pre} ${!output && "text-neutral-400"} `}
-        >
-          {output || outputExample}
+        <pre className={`${css.pre} ${!output && "text-neutral-400"} `}>
+          {disabled ? outputExample : output}
         </pre>
       </div>
-      <CopyButton output={output}/>
+      <CopyButton output={output} disabled={disabled} />
     </Card>
   );
 };

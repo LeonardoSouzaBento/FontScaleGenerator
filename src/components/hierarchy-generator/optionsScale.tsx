@@ -32,7 +32,7 @@ const OptionsScale = ({
             className={`min-w-20 rounded-full ${
               item.value !== scaleValue
                 ? "bg-white"
-                : "ring ring-ring shadow-sm"
+                : "ring ring-accent text-primary shadow-sm"
             }`}
             onClick={() => {
               setScaleValue(item.value);

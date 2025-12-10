@@ -1,5 +1,7 @@
 import { Code2 } from "lucide-react";
 
+const linearGradient = "from-start via-start to-end";
+
 const Header = () => {
   return (
     <header
@@ -9,16 +11,15 @@ const Header = () => {
     >
       <div className={`flex items-center justify-center gap-3 mb-2 sm:mb-0`}>
         <div
-          className={`p-3 bg-linear-to-br from-primary to-end rounded-xl shadow-lg`}
+          className={`p-[10px] mb-0.5 bg-linear-to-br ${linearGradient} rounded-xl shadow-lg`}
         >
-          <Code2 className={`h-8 w-8 text-white`} />
+          <Code2 className={`h-8 w-8 text-white/93`} strokeWidth={2.2} />
         </div>
       </div>
 
       <div>
         <h1
-          className={`h-auto big-h1 font-extrabold bg-linear-to-r from-primary
-             to-end bg-clip-text pb-2 mb-0 text-transparent capitalize sm:text-left`}
+          className={`h-auto big-h1 font-extrabold bg-linear-to-r ${linearGradient} bg-clip-text pb-2 mb-0 text-transparent capitalize sm:text-left`}
         >
           typographic scale generator
         </h1>

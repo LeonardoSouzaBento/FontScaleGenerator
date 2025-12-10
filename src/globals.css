@@ -11,35 +11,38 @@
   --color-popover: hsl(0 0% 100%);
   --color-popover-foreground: hsl(215 25% 15%);
 
-  --color-primary: hsl(186 62% 45%);
-  --color-primary-foreground: hsl(0 0% 100%);
+  --color-primary: hsl(215 90% 45%);
+  --color-primary-foreground: hsl(220 25% 98%);
 
-  --color-secondary: hsl(210 15% 92%);
+  --color-secondary: hsl(215 15% 92%);
   --color-secondary-foreground: hsl(215 25% 15%);
 
-  --color-muted: hsl(210 15% 94%);
-  --color-muted-foreground: hsl(215 15% 40%);
+  --color-muted: hsl(215 15% 94%);
+  --color-muted-foreground: hsl(215 10% 33%);
 
-  --color-accent: hsl(186 62% 45%);
+  --color-accent: hsla(215, 90%, 45%, 0.50);
   --color-accent-foreground: hsl(0 0% 100%);
 
   --color-destructive: hsl(0 72% 51%);
-  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-destructive-foreground: hsl(0, 43%, 93%);
+
+  --color-warn: hsl(38 92% 50%);
+  --color-warn-foreground: hsl(215 25% 15%);
 
   --color-border: hsl(214 20% 88%);
   --color-input: hsl(214 20% 90%);
   --color-ring: hsl(186 62% 45%);
 
   /* Sombras */
-  --shadow-xs: 0 1px 1.5px rgba(0, 0, 0, 0.21);
+  --shadow-xs: 0 1px 2px -1px rgba(0, 0, 0, 0.18);
   --shadow-sm: 0 2px 3px -1.5px rgba(0, 0, 0, 0.18);
   --shadow-md: 0 4px 6px -3px rgba(0, 0, 0, 0.15);
   --shadow-lg: 0 8px 12px -6px rgba(0, 0, 0, 0.12);
   --shadow-xl: 0 12px 24px -8px rgba(0, 0, 0, 0.09);
 
   /* Gradientes */
-  --color-start: hsl(186 62% 45%);
-  --color-end: hsl(172 66% 50%);
+  --color-start: hsl(215 90% 45%);
+  --color-end: hsl(220, 93%, 28%);
 
   /* Transições */
   --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
