@@ -4,7 +4,7 @@ import CopyButton from "./copy-button";
 import { outputExample } from "@/data/outputExample";
 
 const css = {
-  pre: `bg-gray-50 p-4 rounded-lg font-thin
+  pre: `bg-background p-4 rounded-lg font-thin
   overflow-x-auto whitespace-pre-wrap wrap-break-word transition-opacity duration-400`,
 };
 

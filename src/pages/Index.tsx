@@ -1,14 +1,15 @@
 import Header from "@/components/header-and-footer/header";
 import HierarchyGenerator from "@/components/hierarchy-generator";
 import Prev from "@/components/prev";
-import RelevantQuestions from "@/components/RelevantQuestions";
+import PersonalGuidelines from "@/components/prev/personal-guidelines";
+import RelevantQuestions from "@/components/relevant-questions";
 import { useResizeWatcher } from "@/hooks/useResizeWatcher";
 import { ClampValue } from "@/types";
 import { Card, CardContent } from "@/ui/card";
 import Output from "@/ui/output";
 import { useEffect, useRef, useState } from "react";
 
-const mainCss = `h-max pb-8 px-3 sm:px-6 max-w-2xl xl:max-w-7xl mx-auto box-content`;
+const mainCss = `h-max px-3 sm:px-6 max-w-2xl xl:max-w-7xl mx-auto box-content`;
 
 const Index = () => {
   const [clampValues, setClampValues] = useState<ClampValue>({});
@@ -36,8 +37,8 @@ const Index = () => {
 
       <main
         className={`${mainCss}
-          overflow-hidden grid grid-rows-2 xl:grid-rows-1 
-          xl:grid-cols-2 gap-8 relative`}
+          pb-7 overflow-hidden grid grid-rows-2 xl:grid-rows-1 
+          xl:grid-cols-2 gap-7 relative`}
       >
         <Card ref={cardRef} className={`w-full h-max min-h-max mx-auto`}>
           <CardContent>
@@ -50,9 +51,12 @@ const Index = () => {
         <Output cardHeight={cardHeight} output={output} />
       </main>
 
-      <div className={`${mainCss}`}>
+      <div className={`${mainCss} mb-8`}>
         <Prev clampValues={clampValues} />
-        <RelevantQuestions />
+        <div className={`flex flex-col xl:grid xl:grid-rows-1 xl:grid-cols-2 gap-7`}>
+          <PersonalGuidelines />
+          <RelevantQuestions />
+        </div>
       </div>
 
       <footer

@@ -9,7 +9,7 @@ import ParagraphsSection from "./prev/paragraphs-section";
 import TitlesSection from "./prev/titles-section";
 
 const css = {
-  wrapper: `w-full mb-8 mx-auto`,
+  wrapper: `w-full mb-7 mx-auto`,
   section: `min-h-max space-y-5 border-t rounded-none py-4 box-content`,
 };
 

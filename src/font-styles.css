@@ -70,6 +70,19 @@
 
 /* Pesos cores e line-height */
 @layer components {
+  body {
+    @apply leading-normal; /* 1.5 */
+  }
+  .large-text {
+    @apply leading-[1.45];
+  }
+  .small-text {
+    @apply leading-[1.7];
+  }
+  .smaller-text {
+    @apply leading-[1.7];
+  }
+  
   label {
     @apply font-medium text-card-foreground;
   }
@@ -80,4 +93,3 @@
     @apply font-light leading-relaxed;
   }
 }
-
