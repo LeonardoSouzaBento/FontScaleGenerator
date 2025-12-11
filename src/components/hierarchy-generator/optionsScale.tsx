@@ -1,13 +1,18 @@
 import { Button } from "@/ui/button";
 import { scales } from "@/data/variables";
+import { StateSetter } from "@/types";
+
+interface OptionsScaleProps {
+  scaleValue: number;
+  setScaleValue: StateSetter<number>;
+  setCanGenerate: StateSetter<number>;
+}
 
 const OptionsScale = ({
   scaleValue,
   setScaleValue,
-}: {
-  scaleValue: number;
-  setScaleValue: (value: number) => void;
-}) => {
+  setCanGenerate,
+}: OptionsScaleProps) => {
   return (
     <div
       className={`flex flex-col gap-3 pt-3 pb-5 border-t 
@@ -36,6 +41,7 @@ const OptionsScale = ({
             }`}
             onClick={() => {
               setScaleValue(item.value);
+              setCanGenerate((prev) => prev + 1);
             }}
           >
             {item.value}

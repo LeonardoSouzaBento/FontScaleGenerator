@@ -45,6 +45,7 @@ const Index = () => {
         <Card ref={cardRef} className={`w-full h-max min-h-max mx-auto`}>
           <CardContent>
             <HierarchyGenerator
+              output={output}
               setOutput={setOutput}
               setClampValues={setClampValues}
               disabled={disabled}

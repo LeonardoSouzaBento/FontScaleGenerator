@@ -1,6 +1,6 @@
 import { useResizeWatcher } from "@/hooks/useResizeWatcher";
 import { ClampValue } from "@/types";
-import { Card } from "@/ui/card";
+import { Card, CardTitle } from "@/ui/card";
 import { useEffect, useRef, useState } from "react";
 import ButtonsSection from "./prev/buttons-section";
 import FormsSection from "./prev/forms-section";
@@ -42,7 +42,7 @@ const Prev = ({ clampValues }: { clampValues: ClampValue }) => {
   return (
     <Card className={css.wrapper}>
       <div className={`space-y-4 pb-5`}>
-        <h3 className={`text-primary leading-none`}>Prévia:</h3>
+        <CardTitle className={`text-primary`}>Prévia:</CardTitle>
         <Nav
           selectedComponent={selectedComponent}
           setSelectedComponent={setSelectedComponent}

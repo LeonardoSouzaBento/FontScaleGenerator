@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import Inputs from "./hierarchy-generator/inputs";
 import OptionsScale from "./hierarchy-generator/optionsScale";
 import { generateClamp } from "@/functions/scaleSizesAndReturn/genClamp";
+import CopyButton from "@/ui/copy-button";
 
 interface Props {
+  output: string;
   setOutput: StateSetter<string>;
   setClampValues: StateSetter<ClampValue>;
   disabled: boolean;
@@ -21,6 +23,7 @@ function deduceFontAt1536px(font640: number, font1280: number): number {
 }
 
 const HierarchyGenerator = ({
+  output,
   setOutput,
   setClampValues,
   disabled,
@@ -33,7 +36,16 @@ const HierarchyGenerator = ({
   const [scaledList, setScaledList] = useState<ScaledList[]>([]);
 
   useEffect(() => {
-    if (canGenerate > 0) {
+    setDisabled(
+      !newMinBase ||
+        !newMaxBase ||
+        newMinBase.toString().length < 2 ||
+        newMaxBase.toString().length < 2
+    );
+  }, [newMinBase, newMaxBase]);
+
+  useEffect(() => {
+    if (canGenerate > 0 && !disabled) {
       const minEm = newMinBase / 16;
       const maxEm = newMaxBase / 16;
 
@@ -64,12 +76,6 @@ const HierarchyGenerator = ({
     setClampValues(clampTable);
   }, [scaledList]);
 
-  useEffect(() => {
-    setDisabled(
-      !newMinBase || !newMaxBase || newMinBase.toString().length < 2 || newMaxBase.toString().length < 2
-    );
-  }, [newMinBase, newMaxBase]);
-
   return (
     <div className={`flex flex-col gap-5`}>
       <Inputs
@@ -80,13 +86,13 @@ const HierarchyGenerator = ({
         setCanGenerate={setCanGenerate}
       />
 
-      <OptionsScale scaleValue={scaleValue} setScaleValue={setScaleValue} />
-
-      <GenButton
-        title="Gerar CSS"
+      <OptionsScale
+        scaleValue={scaleValue}
+        setScaleValue={setScaleValue}
         setCanGenerate={setCanGenerate}
-        disabled={disabled}
       />
+
+      <CopyButton output={output} disabled={disabled} />
     </div>
   );
 };

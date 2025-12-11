@@ -32,3 +32,122 @@ export const scales: Scale[] = [
   { name: "perfect-fifth", value: 1.5 },
   { name: "golden-ratio", value: 1.618 },
 ];
+
+export const secondStyles = `@layer components {
+  body {
+    font-family: "Inter", sans-serif;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Merriweather", serif;
+  }
+  p {
+    @apply max-w-[65ch] sm:max-w-[73ch] md:max-w-[75ch] 
+    lg:max-w-[78ch] xl:max-w-[82ch] 2xl:max-w-[85ch];
+  }
+
+  /* ---------- Pesos ---------- */
+  input::placeholder {
+    @apply font-light;
+  }
+
+  p,
+  li,
+  input,
+  select,
+  option {
+    @apply font-normal;
+  }
+
+  a,
+  h6,
+  h5,
+  h4 {
+    @apply font-medium;
+  }
+
+  h3,
+  h2 {
+    @apply font-semibold;
+  }
+
+  h1 {
+    @apply font-bold;
+  }
+
+  .helper-text,
+  .description-text {
+    @apply font-light;
+  }
+
+  .normal-button,
+  .small-button,
+  .big-link,
+  .small-link {
+    @apply font-medium;
+  }
+
+  /* ---------- Line heights ---------- */
+  .hero {
+    @apply leading-[1.1];
+  }
+  h1 {
+    @apply leading-[1.18];
+  }
+  h2 {
+    @apply leading-[1.24];
+  }
+  h3 {
+    @apply leading-[1.28];
+  }
+  h4 {
+    @apply leading-[1.32];
+  }
+  h5 {
+    @apply leading-[1.38];
+  }
+  h6 {
+    @apply leading-[1.44];
+  }
+  p,
+  li,
+  input,
+  select,
+  option {
+    @apply leading-[1.52];
+  }
+
+  label {
+    @apply leading-[1.35];
+  }
+
+  button {
+    @apply leading-[1.15];
+  }
+
+  /* corpo */
+  .large-text {
+    @apply leading-[1.68];
+  }
+  .normal-text {
+    @apply leading-normal;
+  }
+  .small-text {
+    @apply leading-[1.6];
+  }
+  .smaller-text {
+    @apply leading-normal;
+  }
+
+  /* botões */
+  .large-button {
+    @apply leading-[1.20];
+  }
+  .small-button {
+    @apply leading-[1.10];
+  }
+}`;

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Card } from "./card";
+import { Card, CardTitle } from "./card";
 import CopyButton from "./copy-button";
 import { outputExample } from "@/data/outputExample";
 
 const css = {
-  pre: `bg-background p-4 rounded-lg font-thin
+  pre: `bg-background p-4 rounded-md font-thin
   overflow-x-auto whitespace-pre-wrap wrap-break-word transition-opacity duration-400`,
 };
 
@@ -37,11 +37,10 @@ const Output = ({
           className={`absolute top-0 -z-1 left-0 size-full rounded-md bg-transparent 
             transition-all duration-200 ${animate && "bg-white/66 z-2"}`}
         />
-        <pre className={`${css.pre} ${!output && "text-neutral-400"} `}>
+        <pre className={`${css.pre} ${disabled && "text-neutral-400"} `}>
           {disabled ? outputExample : output}
         </pre>
       </div>
-      <CopyButton output={output} disabled={disabled} />
     </Card>
   );
 };
