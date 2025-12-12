@@ -41,8 +41,8 @@ const Prev = ({ clampValues }: { clampValues: ClampValue }) => {
 
   return (
     <Card className={css.wrapper}>
-      <div className={`space-y-4 pb-5`}>
-        <CardTitle className={`text-primary`}>Prévia:</CardTitle>
+      <div className={`pb-5`}>
+        <CardTitle className={`text-primary pb-2.5`}>Prévia:</CardTitle>
         <Nav
           selectedComponent={selectedComponent}
           setSelectedComponent={setSelectedComponent}
