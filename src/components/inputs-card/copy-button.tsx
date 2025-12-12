@@ -5,7 +5,9 @@ import { toast } from "sonner";
 
 interface CopyButtonProps {
   output: string;
+  secondOutput: string;
   disabled: boolean;
+  returnType: string;
 }
 
 const css = {
@@ -19,10 +21,11 @@ hover:scale-[1.02] relative`,
 
 const iconStyle = { strokeWidth: 2.3, size: "1.125rem" };
 
-const CopyButton = ({ output, disabled }: CopyButtonProps) => {
+const CopyButton = ({ output, secondOutput, disabled, returnType }: CopyButtonProps) => {
   const [copied, setCopied] = useState(false);
   const [warn, setWarn] = useState("");
   const timeOutRef = useRef<number>(0);
+  const outputToCopy = returnType === "tw" ? output : secondOutput;
 
   const handleCopy = async () => {
     if (disabled) {
@@ -32,7 +35,7 @@ const CopyButton = ({ output, disabled }: CopyButtonProps) => {
       return;
     }
     try {
-      await navigator.clipboard.writeText(output);
+      await navigator.clipboard.writeText(outputToCopy);
       setCopied(true);
       toast.success("Copiado para área de transferência!");
       setTimeout(() => setCopied(false), 2000);

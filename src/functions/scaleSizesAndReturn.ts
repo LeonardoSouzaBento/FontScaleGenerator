@@ -1,11 +1,9 @@
-import { sizes } from "@/data/variables";
-import { CssValues, ScaledList, StateSetter } from "@/types";
+import { CssValues, ScaledList } from "@/types";
+import { genScaledList } from "./genScaledList";
+import { buttonSizes, textClasses, twTextVariables } from "@/data/variables";
 
 /* ---------- Funções auxiliares ---------- */
-export function genFontSizeScale(
-  font640: number,
-  font1280: number
-): string {
+export function genFontSizeScale(font640: number, font1280: number): string {
   const breakpoints: string[] = ["", "sm", "md", "lg", "xl", "2xl"];
 
   const calcFontSize = (index: number) => {
@@ -27,20 +25,39 @@ export function genFontSizeScale(
   return result.trim();
 }
 
-function buildTailwindCSSTable(
-  scaledList: ScaledList[],
-): CssValues[] {
-  const table: CssValues[] = [];
+const specialRules: Record<string, string> = {
+  ".normal-text": `text-[1.00em];`,
+  button: `text-[${buttonSizes.normal}];`,
+  ".small-button": `text-[${buttonSizes.small}];`,
+  ".large-button": `text-[${buttonSizes.large}];`,
+};
 
-  scaledList.forEach(({ tagName, minSize, maxSize }) => {
-    if (tagName === ".normal-p") {
-      table.push({ tagName, value: "font-size: 1.00em;" });
-    } else {
-      table.push({ tagName, value: genFontSizeScale(minSize, maxSize) });
+function buildTailwindCSSTable(scaledList: ScaledList[]): CssValues[] {
+  return scaledList.map(({ tagName, minSize, maxSize }) => {
+    const rule = specialRules[tagName];
+    if (textClasses.includes(tagName)) {
+      return {
+        tagName,
+        value: `text-[${minSize.toFixed(6)}em];`,
+      };
     }
+    return {
+      tagName,
+      value: rule ?? genFontSizeScale(minSize, maxSize),
+    };
   });
+}
 
-  return table;
+function genTextVariables(scaledList: ScaledList[]): string {
+  const variables = twTextVariables.map(({ varName, className }) => {
+    const values = scaledList.find((item) => item.tagName === className);
+    if (varName === "--text-base") {
+      return `${varName}: 1em;`;
+    }
+    return `${varName}: ${values?.minSize.toFixed(6)}em;`;
+  }).join("\n");
+
+  return `@theme {\n...\n${variables}\n...\n}`;
 }
 
 /* ---------- Função principal ---------- */
@@ -48,23 +65,19 @@ function buildTailwindCSSTable(
 export function scaleSizesAndReturn(
   minSizeBody: number,
   maxSizeBody: number,
-  scaleValue: number,
+  scaleValue: number
 ): string {
-  const scaledList = sizes.map((item) => {
-    return {
-      ...item,
-      minSize: Number(
-        (minSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)
-      ),
-      maxSize: Number(
-        (maxSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)
-      ),
-    };
-  });
+  const scaledList = genScaledList(minSizeBody, maxSizeBody, scaleValue);
 
   const tailwindCSSTable = buildTailwindCSSTable(scaledList);
 
-  return `@layer components {\n${tailwindCSSTable.map(({ tagName, value }) => {
-    return `${tagName} {\n@apply ${value}\n}`;
-  }).join("\n\n")} \n}`;
+  const textVariables = genTextVariables(scaledList);
+
+  const layerComponents = `@layer components {\n${tailwindCSSTable
+    .map(({ tagName, value }) => {
+      return `${tagName} {\n@apply ${value}\n}`;
+    })
+    .join("\n\n")} \n}`;
+
+  return `${textVariables}\n\n${layerComponents}`;
 }

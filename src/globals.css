@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @theme {
+  --text-base: 1em;
+  --text-xs: 0.922275em;
+  --text-sm: 0.984067em;
+  --text-lg: 1.12035em;
   /* Cores */
   --color-background: hsl(210 20% 98%);
   --color-foreground: hsl(215 25% 15%);
@@ -106,30 +110,30 @@ html {
     text-[1.05000em] sm:text-[1.05938em] md:text-[1.06125em] lg:text-[1.06500em] 
     xl:text-[1.06875em] 2xl:text-[1.07250em] leading-normal;
   }
-  
-  html, body {
+
+  html,
+  body {
     scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* IE and Edge */
+    -ms-overflow-style: none; /* IE and Edge */
   }
-  html::-webkit-scrollbar, body::-webkit-scrollbar {
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
   }
 
   p {
     @apply cursor-default;
   }
-  button{
-    @apply cursor-pointer;
+  button {
+    @apply cursor-pointer capitalize;
+  }
+  label {
+    @apply text-muted-foreground;
   }
   pre {
+    font-family: "Ubuntu Mono", monospace;
     @apply cursor-default bg-background text-foreground 
-    rounded-md wrap-break-word py-4 px-5 overflow-y-scroll whitespace-pre-wrap
-    transition-opacity duration-400 font-thin;
-  }
-}
-
-@layer components {
-  * {
-    @apply border-border;
+    rounded-md wrap-break-word py-4 px-5 whitespace-pre-wrap
+    transition-opacity duration-400 font-normal;
   }
 }

@@ -19,6 +19,7 @@ const Nav = ({
             optionButton
             isSelected={selected}
             key={item}
+            className={`capitalize`}
             onClick={() => setSelectedComponent(item)}
           >
             {item}

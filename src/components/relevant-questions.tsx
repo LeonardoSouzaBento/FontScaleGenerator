@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { Button } from "@/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import { ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const questions = [
   {
@@ -14,16 +14,36 @@ const questions = [
   },
   {
     question: `Porque "rem" é a melhor medida?`,
-    answer: `Por conta da necessidade de acessibilidade para grupos específicos (pessoas com baixa visão e idosos). Além disso, existe a facilidade de que se o fonte-size do elemento raiz (a tag html) for alterado, todos os outros elementos (títulos, margens, padding, etc.) se ajustarão automaticamente e de forma proporcional ao novo tamanho base definido, considerando que o tailwind define tudo utilizando rem por padrão.`,
+    answer: `Por conta da necessidade de acessibilidade para grupos específicos (pessoas com baixa visão e idosos). Além disso, existe a facilidade de que se o fonte-size do elemento raiz (a tag html) for alterado, todos os outros elementos (títulos, margens, padding, etc.) se ajustarão automaticamente e de forma proporcional ao novo tamanho base definido, considerando que o tailwind define tudo utilizando rem por padrão (rem significa "em relação ao tamanho da raiz", que por padrão é 16px).`,
   },
   {
     question: `Porque esse site é util?`,
     answer: `Ao gerar para você estilos padronizados para as principais tags textuais (como parágrafos e títulos de h1 a h6) e pegar a lista de demais estilos recomendados clicando em "ver mais estilos recomendados", você garante que seu projeto tenha uma base completa de estilização de tipografia, melhorando muito o design de interface da sua aplicação e a experiência do usuário e aumentando o valor do seu produto.`,
   },
+  {
+    question: `Como trabalhamos a escalada (para leigos)?`,
+    answer: `As tags pequenas como p e button herdam os tamanhos de fonte do body. Aplicando a medida "em" ("em" é em relação ao tamanho de fonte do elemento pai), dizemos o quanto a fonte deve ser menor ou maior do que o font-size do pai (o body). É assim que definimos diferentes tamanhos de fonte para as tags p, button, labels e outras, que variam em relação ao tamanho do corpo (do p normal). Não podemos aplicar o mesmo para os títulos. H6 é base x escala, h5 é base x escala x escala, e assim por diante. É isso que retornamos pra você.`,
+  },
 ];
+
+const css = {
+  wrapperQuestions: `mb-3 last:mb-0!`,
+  wrapperPAndButton: `h-auto flex justify-between items-center 
+  gap-4 min-h-9`,
+  selectedWrapperPAndButton: ``,
+  pQuestion: `box-content text-lg`,
+  pAnswer: `text-muted-foreground`,
+};
 
 const RelevantQuestions = () => {
   const [selectedQuestion, setSelectedQuestion] = useState<string>("");
+  const [selectedAnswer, setSelectedAnswer] = useState<string>("");
+
+  useEffect(() => {
+    setSelectedAnswer(
+      questions.find((item) => item.question === selectedQuestion)?.answer || ""
+    );
+  }, [selectedQuestion]);
 
   return (
     <Card className={`w-full max-h-max xl:max-h-none`}>
@@ -31,34 +51,40 @@ const RelevantQuestions = () => {
         <CardTitle>Perguntas pertinentes</CardTitle>
       </CardHeader>
       <CardContent>
-        {questions.map((item, index) => (
-          <div
-            key={index}
-            className={`mb-3 space-y-2 last:mb-0!`}
-            onClick={() =>
-              setSelectedQuestion((prev) =>
-                prev === item.question ? "" : item.question
-              )
-            }
-          >
-            <div
-              className={`flex justify-between items-center gap-4`}
-            >
-              <p className={`leading-none large-text`}>{item.question}</p>
-              <Button className={`rounded-full`} variant="ghost" size="icon">
-                <ChevronDown
-                  className={
-                    selectedQuestion === item.question ? "rotate-180" : ""
-                  }
-                />
-              </Button>
-            </div>
+        <div>
+          {questions.map((item, index) => {
+            const selected = selectedQuestion === item.question;
+            return (
+              <div
+                key={index}
+                className={`${css.wrapperQuestions}`}
+                onClick={() => {
+                  setSelectedQuestion((prev) =>
+                    prev === item.question ? "" : item.question
+                  );
+                }}
+              >
+                <div
+                  className={`${css.wrapperPAndButton} 
+                  ${selected && css.selectedWrapperPAndButton}`}
+                >
+                  <p className={`${css.pQuestion}`}>{item.question}</p>
 
-            {selectedQuestion === item.question && (
-              <p className={`text-muted-foreground`}>{item.answer}</p>
-            )}
-          </div>
-        ))}
+                  <Button
+                    className={`rounded-full`}
+                    variant="ghost"
+                    size="icon"
+                  >
+                    <ChevronDown className={selected ? "rotate-180" : ""} />
+                  </Button>
+                </div>
+                {selected && (
+                  <p className={`${css.pAnswer}`}>{selectedAnswer}</p>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </CardContent>
     </Card>
   );

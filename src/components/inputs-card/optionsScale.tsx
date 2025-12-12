@@ -15,13 +15,13 @@ const OptionsScale = ({
 }: OptionsScaleProps) => {
   return (
     <div
-      className={`flex flex-col gap-2.5 rounded-none border-b 
+      className={`flex flex-col gap-3 rounded-none border-b 
         border-input sm:border-b-0 pb-4.5 sm:pb-0`}
     >
       <label
         htmlFor="scale"
         className={` tracking-wide 
-            text-card-foreground`}
+            text-muted-foreground`}
       >
         Escala tipográfica
       </label>

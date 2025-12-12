@@ -4,6 +4,7 @@ import { scales, sizes } from "@/data/variables";
 import { generateClamp } from "@/functions/buildClampTable";
 import { scaleSizesAndReturn } from "@/functions/scaleSizesAndReturn";
 import { scaleSizesAndReturnCSS } from "@/functions/scaleSizesAndReturnCSS";
+import { genScaledList } from "@/functions/genScaledList";
 import CopyButton from "@/components/inputs-card/copy-button";
 import Inputs from "./inputs-card/inputs";
 import OptionsScale from "./inputs-card/optionsScale";
@@ -15,32 +16,14 @@ function deduceFontAt1536px(font640: number, font1280: number): number {
   return Number(font1536.toFixed(2));
 }
 
-function genScaledList(
-  minSizeBody: number,
-  maxSizeBody: number,
-  scaleValue: number
-): ScaledList[] {
-  const scaledList = sizes.map((item) => {
-    return {
-      ...item,
-      minSize: Number(
-        (minSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)
-      ),
-      maxSize: Number(
-        (maxSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)
-      ),
-    };
-  });
-  return scaledList;
-}
-
 interface Props {
   output: string;
+  secondOutput: string;
   setOutput: StateSetter<string>;
+  setSecondOutput: StateSetter<string>;
   setClampValues: StateSetter<ClampValue>;
   disabled: boolean;
   setDisabled: StateSetter<boolean>;
-  setSecondOutput: StateSetter<string>;
   returnType: string;
   setReturnType: StateSetter<string>;
   canGenerate: number;
@@ -50,6 +33,7 @@ interface Props {
 const InputsCard = ({
   output,
   setOutput,
+  secondOutput,
   setSecondOutput,
   returnType,
   setReturnType,
@@ -86,6 +70,8 @@ const InputsCard = ({
         setOutput(fullCss);
       } else {
         const fullCss = scaleSizesAndReturnCSS(minEm, maxEm, scaleValue);
+        console.log(fullCss);
+        
         setSecondOutput(fullCss);
       }
     }
@@ -119,7 +105,7 @@ const InputsCard = ({
       />
 
       <div
-        className={`flex flex-col gap-3 pt-3 pb-5 sm:flex-row border-t 
+        className={`flex flex-col gap-3 pt-3.5 pb-4 sm:flex-row border-t 
         border-b border-input box-content`}
       >
         <OptionsScale
@@ -133,7 +119,7 @@ const InputsCard = ({
           setCanGenerate={setCanGenerate}
         />
       </div>
-      <CopyButton output={output} disabled={disabled} />
+      <CopyButton output={output} secondOutput={secondOutput} disabled={disabled} returnType={returnType}/>
     </>
   );
 };

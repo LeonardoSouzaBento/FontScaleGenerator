@@ -1,6 +1,6 @@
 import { useResizeWatcher } from "@/hooks/useResizeWatcher";
 import { ClampValue } from "@/types";
-import { Card, CardTitle } from "@/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import { useEffect, useRef, useState } from "react";
 import ButtonsSection from "./prev/buttons-section";
 import FormsSection from "./prev/forms-section";
@@ -10,7 +10,7 @@ import TitlesSection from "./prev/titles-section";
 
 const css = {
   wrapper: `w-full mb-7 mx-auto`,
-  section: `min-h-max space-y-5 border-t rounded-none py-4 box-content`,
+  section: `min-h-max space-y-5 rounded-none box-content`,
 };
 
 export const componentExamples = [
@@ -41,33 +41,36 @@ const Prev = ({ clampValues }: { clampValues: ClampValue }) => {
 
   return (
     <Card className={css.wrapper}>
-      <div className={`pb-5`}>
-        <CardTitle className={`text-primary pb-2.5`}>Prévia:</CardTitle>
+      <CardHeader className={`pb-4`}>
+        <CardTitle className={`text-primary`}>Prévia</CardTitle>
         <Nav
           selectedComponent={selectedComponent}
           setSelectedComponent={setSelectedComponent}
         />
-      </div>
-      <section
-        className={css.section}
-        style={{ height: firstSectionHeight || "auto" }}
-      >
-        {selectedComponent === "títulos" && (
-          <TitlesSection
-            props={{ ref: firstSectionRef }}
-            clampValues={clampValues}
-          />
-        )}
-        {selectedComponent === "parágrafos" && (
-          <ParagraphsSection clampValues={clampValues} />
-        )}
-        {selectedComponent === "botões" && (
-          <ButtonsSection clampValues={clampValues} />
-        )}
-        {selectedComponent === "formulários" && (
-          <FormsSection clampValues={clampValues} />
-        )}
-      </section>
+      </CardHeader>
+      
+      <CardContent>
+        <section
+          className={css.section}
+          style={{ height: firstSectionHeight || "auto" }}
+        >
+          {selectedComponent === "títulos" && (
+            <TitlesSection
+              props={{ ref: firstSectionRef }}
+              clampValues={clampValues}
+            />
+          )}
+          {selectedComponent === "parágrafos" && (
+            <ParagraphsSection clampValues={clampValues} />
+          )}
+          {selectedComponent === "botões" && (
+            <ButtonsSection clampValues={clampValues} />
+          )}
+          {selectedComponent === "formulários" && (
+            <FormsSection clampValues={clampValues} />
+          )}
+        </section>
+      </CardContent>
     </Card>
   );
 };

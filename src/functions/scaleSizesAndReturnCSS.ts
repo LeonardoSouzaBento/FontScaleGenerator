@@ -1,11 +1,8 @@
+import { CssValues, ScaledList } from "@/types";
+import { genScaledList } from "./genScaledList";
+import { buttonSizes, textClasses } from "@/data/variables";
 
-import { sizes } from "@/data/variables";
-import { StateSetter, ScaledList, CssValues } from "@/types";
-
-function scaleSizesForPureCSS(
-  font640: number,
-  font1280: number
-): string {
+function scaleSizesForPureCSS(font640: number, font1280: number): string {
   const breakpoints = [
     { prefix: "", min: 0 },
     { prefix: "sm", min: 640 },
@@ -20,29 +17,39 @@ function scaleSizesForPureCSS(
   let result = "";
 
   breakpoints.forEach((bp, index) => {
-    const size =
-      proportions[index] * (font1280 - font640) + font640;
+    const size = proportions[index] * (font1280 - font640) + font640;
 
     if (index === 0) {
       result += `font-size: ${size.toFixed(5)}rem;\n`;
     } else {
-      result += `@media (min-width: ${bp.min}px) {\n  font-size: ${size.toFixed(5)}rem;\n}\n`;
+      result += `@media (min-width: ${bp.min}px) {font-size: ${size.toFixed(5)}rem;}\n`;
     }
   });
 
   return result.trim();
 }
 
+const specialRules = {
+  ".normal-text": "font-size: 1.00em;",
+  button: `font-size: ${buttonSizes.normal};`,
+  ".small-button": `font-size: ${buttonSizes.small};`,
+  ".large-button": `font-size: ${buttonSizes.large};`,
+};
+
 function buildCSSPureTable(scaledList: ScaledList[]): CssValues[] {
   const table: CssValues[] = [];
 
   scaledList.forEach(({ tagName, minSize, maxSize }) => {
-    if (tagName === ".normal-p") {
-      table.push({ tagName, value: "font-size: 1em;" });
+    const rule = specialRules[tagName];
+    if (textClasses.includes(tagName)) {
+      table.push({
+        tagName,
+        value: `font-size: ${minSize.toFixed(6)}em;`,
+      });
     } else {
       table.push({
         tagName,
-        value: scaleSizesForPureCSS(minSize, maxSize),
+        value: rule ?? scaleSizesForPureCSS(minSize, maxSize),
       });
     }
   });
@@ -53,20 +60,13 @@ function buildCSSPureTable(scaledList: ScaledList[]): CssValues[] {
 export function scaleSizesAndReturnCSS(
   minSizeBody: number,
   maxSizeBody: number,
-  scaleValue: number,
+  scaleValue: number
 ): string {
-  const scaledList = sizes.map((item) => ({
-    ...item,
-    minSize: Number((minSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)),
-    maxSize: Number((maxSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)),
-  }));
+  const scaledList = genScaledList(minSizeBody, maxSizeBody, scaleValue);
 
   const cssTable = buildCSSPureTable(scaledList);
 
   return cssTable
-    .map(
-      ({ tagName, value }) =>
-        `${tagName} {\n${value}\n}`
-    )
+    .map(({ tagName, value }) => `${tagName} {${value}}`)
     .join("\n\n");
 }

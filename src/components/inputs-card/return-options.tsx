@@ -23,8 +23,8 @@ const ReturnOptions = ({
   }, [returnType]);
 
   return (
-    <div className={`flex flex-col gap-2.5 sm:pl-5 sm:border-l border-input`}>
-      <p className={`text-small font-medium`}>Saída</p>
+    <div className={`flex flex-col gap-3 sm:pl-5 sm:border-l border-input`}>
+      <p className={`text-small font-medium text-muted-foreground`}>Saída</p>
       <div
         className={`w-full flex justify-start gap-3 sticky bottom-0
           right-0! sm:flex-col sm:max-w-max`}

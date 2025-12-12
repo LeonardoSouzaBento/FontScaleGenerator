@@ -2,20 +2,24 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      `p-6 rounded-lg bg-card text-card-foreground 
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  noHeader?: boolean;
+}
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, noHeader = false, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        `rounded-lg bg-card text-card-foreground 
        transition-shadow duration-300 shadow-lg hover:shadow-xl`,
-      className
-    )}
-    {...props}
-  />
-));
+        noHeader ? "p-6 pt-6" : "p-6 pt-0",
+        className
+      )}
+      {...props}
+    />
+  )
+);
 Card.displayName = "Card";
 
 const CardHeader = React.forwardRef<
@@ -24,7 +28,8 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5 pb-2.5 -mt-2 border-b", className)}
+    className={cn(`flex flex-col space-y-1.5 pb-1.5 pt-4.5 mb-3.5
+      border-b border-border`, className)}
     {...props}
   />
 ));
@@ -36,10 +41,7 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn(
-      "tracking-tight",
-      className
-    )}
+    className={cn("tracking-tight leading-normal", className)}
     {...props}
   />
 ));
@@ -51,7 +53,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-muted-foreground mt-0.5", className)}
+    className={cn("text-muted-foreground text-small", className)}
     {...props}
   />
 ));

@@ -1,13 +1,4 @@
-export const moreCSSStyles = `/* FONTES */
-body {
-  font-family: "Roboto", sans-serif;
-}
-h1,h2,h3,h4,h5,h6 {
-  font-family: "Roboto Serif", serif;
-  /* margin-bottom: 1.25rem; */
-}
-
-/* LARGURA MÁXIMA DO CORPO */
+export const moreCSSStyles = `/* LARGURA MÁXIMA DO CORPO */
 p {
   max-width: 65ch;
 }
@@ -22,22 +13,23 @@ input::placeholder {
   font-weight: 300; /* light */
 }
 
+.helper-text,
+.description-text {
+  font-weight: 300;
+}
+
 p, li, input, select, option {
   font-weight: 400;
 }
 
-a, h6, h5, h4, .normal-button, .small-button, .big-link, .small-link {
+a, h6, h5, h4, button, 
+.small-button, .big-link, .small-link {
   font-weight: 500;
 }
 
 h3, h2 { font-weight: 600;}
 
-h1 { font-weight: 700;}
-
-.helper-text,
-.description-text {
-  font-weight: 300;
-}
+h1, strong { font-weight: 700;}
 
 /* LINE HEIGHTS */
 .h1-hero { line-height: 1.1; }
@@ -68,38 +60,40 @@ button { line-height: 1.15; }
 `;
 
 export const moreTwStyles = `@layer components { 
-/* FONTES */ 
-body { font-family: "Roboto", sans-serif; }
-
-h1, h2, h3, h4, h5, h6 { 
-  font-family: "Roboto Serif", serif; 
-  /* @apply mb-5; */ 
-}
-
 /* LARGURA MÁXIMA DO CORPO */ 
 p { 
-  @apply max-w-[65ch] sm:max-w-[73ch] md:max-w-[75ch] 
+  @apply max-w-[65ch] sm:max-w-[73ch] md:max-w-[75ch]
   lg:max-w-[78ch] xl:max-w-[82ch] 2xl:max-w-[85ch]; 
 }
 
 /* PESOS */
-input::placeholder { @apply font-light; } 
+input::placeholder, .helper-text, 
+.description-text { 
+  @apply font-light; 
+} 
 
-p, li, input, select, option { @apply font-normal; } 
+p, li, input, select, option { 
+  @apply font-normal; 
+} 
 
-a, h6, h5, h4 { @apply font-medium; } 
+a, h6, h5, h4 { 
+  @apply font-medium; 
+}
 
-h3, h2 { @apply font-semibold; }
+button, label, .small-button, 
+.big-link, .small-link { 
+  @apply font-medium; 
+} 
 
-h1 { @apply font-bold; } 
+h3, h2 { 
+  @apply font-semibold; 
+}
 
-.helper-text, .description-text { @apply font-light; } 
-
-.normal-button, .small-button, 
-.big-link, .small-link { @apply font-medium; } 
+h1, strong { 
+  @apply font-bold; 
+} 
 
 /* LINE HEIGHTS */ 
-
 .h1-hero { @apply leading-[1.1]; } 
 h1 { @apply leading-[1.22]; } 
 h2 { @apply leading-[1.24]; } 

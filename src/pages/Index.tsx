@@ -15,7 +15,7 @@ const mainCss = `h-max px-3 sm:px-6 max-w-2xl xl:max-w-7xl mx-auto box-content`;
 
 const Index = () => {
   /* estados de controle */
-  const [returnType, setReturnType] = useState<string>("tw");
+  const [returnType, setReturnType] = useState<"tw" | "css">("tw");
   const [disabled, setDisabled] = useState<boolean>(false);
   const [canGenerate, setCanGenerate] = useState<number>(0);
   /* estados para saídas */
@@ -50,15 +50,16 @@ const Index = () => {
           pb-7 overflow-hidden grid grid-rows-2 xl:grid-rows-1 
           xl:grid-cols-2 gap-7 relative`}
       >
-        <Card ref={cardRef} className={`w-full h-full max-h-max mx-auto`}>
+        <Card ref={cardRef} className={`w-full h-full max-h-max mx-auto pt-5`}>
           <CardContent className={`flex flex-col gap-5`}>
             <InputsCard
               output={output}
+              secondOutput={secondOutput}
               setOutput={setOutput}
+              setSecondOutput={setSecondOutput}
               setClampValues={setClampValues}
               disabled={disabled}
               setDisabled={setDisabled}
-              setSecondOutput={setSecondOutput}
               returnType={returnType}
               setReturnType={setReturnType}
               canGenerate={canGenerate}
@@ -72,13 +73,14 @@ const Index = () => {
           secondOutput={secondOutput}
           disabled={disabled}
           returnType={returnType}
+          canGenerate={canGenerate}
         />
       </main>
 
       <div className={`${mainCss} mb-8`}>
         <Prev clampValues={clampValues} />
         <div
-          className={`flex flex-col xl:grid xl:grid-rows-1 xl:grid-cols-2 gap-7`}
+          className={`flex flex-col gap-7`}
         >
           <PersonalGuidelines setShowMoreStyles={setShowMoreStyles}/>
           <RelevantQuestions />

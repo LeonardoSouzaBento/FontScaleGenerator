@@ -14,20 +14,20 @@ const PersonalGuidelines = ({
       <CardHeader>
         <CardTitle>Orientações minhas</CardTitle>
       </CardHeader>
-      <CardContent className={`space-y-4 pt-2`}>
+      <CardContent className={`space-y-4`}>
         <p className={`text-muted-foreground`}>
-          Coloque os estilos copiados em um arquivo separado que tenha apenas
-          estilos para textos. Um nome como "text-styles.css" é conveniente.
-          Lembre-se de importar o arquivo globals.css para usar as variaveis
-          personalidas, se necessário.
+          Coloque os estilos copiados em um <strong>arquivo separado</strong>{" "}
+          que tenha apenas estilos para textos. Um nome como "text-styles.css" é
+          conveniente. Lembre-se de importar o arquivo globals.css para usar as
+          variaveis personalidas, se necessário.
         </p>
         <p className={`mb-5 text-muted-foreground`}>
-          Você precisará de mais estilos além do CSS de tamanho. Então, clique
-          no botão abaixo se quiser mais.
+          Você precisará de <strong>mais estilos</strong> além do CSS de
+          tamanho. Então, clique no botão abaixo se quiser mais.
         </p>
         <Button
           variant="outline"
-          className={`w-full gap-2.5 shadow-xs`}
+          className={`w-full gap-2.5 hover:shadow-xs`}
           onClick={() => setShowMoreStyles(true)}
         >
           <Eye {...iconMd} />
