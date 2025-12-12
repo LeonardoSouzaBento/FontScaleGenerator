@@ -15,8 +15,8 @@ const OptionsScale = ({
 }: OptionsScaleProps) => {
   return (
     <div
-      className={`flex flex-col gap-3 pt-3 pb-5 border-t 
-    border-b border-input rounded-none`}
+      className={`flex flex-col gap-2.5 rounded-none border-b 
+        border-input sm:border-b-0 pb-4.5 sm:pb-0`}
     >
       <label
         htmlFor="scale"
@@ -34,11 +34,9 @@ const OptionsScale = ({
             key={item.value}
             variant="outline"
             size="sm"
-            className={`min-w-20 rounded-full ${
-              item.value !== scaleValue
-                ? "bg-white"
-                : "ring ring-accent text-primary shadow-sm"
-            }`}
+            optionButton
+            isSelected={item.value === scaleValue}
+            className={`min-w-18`}
             onClick={() => {
               setScaleValue(item.value);
               setCanGenerate((prev) => prev + 1);

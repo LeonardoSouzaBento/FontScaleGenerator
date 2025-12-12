@@ -1,22 +1,23 @@
-import { useEffect, useState } from "react";
-import { Card, CardTitle } from "./card";
-import CopyButton from "./copy-button";
 import { outputExample } from "@/data/outputExample";
+import { secondOutputExample } from "@/data/secondOutputExample";
+import { Card } from "@/ui/card";
+import { useEffect, useState } from "react";
 
-const css = {
-  pre: `bg-background p-4 rounded-md font-thin
-  overflow-x-auto whitespace-pre-wrap wrap-break-word transition-opacity duration-400`,
-};
+interface Props {
+  cardHeight: number;
+  output: string;
+  secondOutput: string;
+  disabled: boolean;
+  returnType: string;
+}
 
 const Output = ({
   disabled,
   output,
   cardHeight,
-}: {
-  disabled: boolean;
-  output: string;
-  cardHeight: number;
-}) => {
+  returnType,
+  secondOutput,
+}: Props) => {
   const [animate, setAnimate] = useState<boolean>(false);
 
   useEffect(() => {
@@ -37,8 +38,14 @@ const Output = ({
           className={`absolute top-0 -z-1 left-0 size-full rounded-md bg-transparent 
             transition-all duration-200 ${animate && "bg-white/66 z-2"}`}
         />
-        <pre className={`${css.pre} ${disabled && "text-neutral-400"} `}>
-          {disabled ? outputExample : output}
+        <pre className={`${disabled && "text-neutral-400"} `}>
+          {disabled && returnType === "tw"
+            ? outputExample
+            : returnType === "tw"
+              ? output
+              : returnType === "css"
+                ? secondOutput
+                : secondOutputExample}
         </pre>
       </div>
     </Card>

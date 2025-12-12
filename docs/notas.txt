@@ -4,4 +4,7 @@ Deixe esses estilos em um arquivo separado para ficar apenas com a definição d
 
 Você precisará definir mais estilos além do css de tamanho, então clique no botão abaixo se quiser mais:
 
+mais recursos
+gerar para styled components e copiar
+Outro gerador de clamps online
 

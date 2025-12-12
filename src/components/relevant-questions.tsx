@@ -16,6 +16,10 @@ const questions = [
     question: `Porque "rem" é a melhor medida?`,
     answer: `Por conta da necessidade de acessibilidade para grupos específicos (pessoas com baixa visão e idosos). Além disso, existe a facilidade de que se o fonte-size do elemento raiz (a tag html) for alterado, todos os outros elementos (títulos, margens, padding, etc.) se ajustarão automaticamente e de forma proporcional ao novo tamanho base definido, considerando que o tailwind define tudo utilizando rem por padrão.`,
   },
+  {
+    question: `Porque esse site é util?`,
+    answer: `Ao gerar para você estilos padronizados para as principais tags textuais (como parágrafos e títulos de h1 a h6) e pegar a lista de demais estilos recomendados clicando em "ver mais estilos recomendados", você garante que seu projeto tenha uma base completa de estilização de tipografia, melhorando muito o design de interface da sua aplicação e a experiência do usuário e aumentando o valor do seu produto.`,
+  },
 ];
 
 const RelevantQuestions = () => {
@@ -23,21 +27,23 @@ const RelevantQuestions = () => {
 
   return (
     <Card className={`w-full max-h-max xl:max-h-none`}>
-      <CardHeader>
+      <CardHeader className={`mb-2`}>
         <CardTitle>Perguntas pertinentes</CardTitle>
       </CardHeader>
       <CardContent>
         {questions.map((item, index) => (
           <div
             key={index}
-            className={`mb-3 space-y-3 last:mb-0!`}
+            className={`mb-3 space-y-2 last:mb-0!`}
             onClick={() =>
               setSelectedQuestion((prev) =>
                 prev === item.question ? "" : item.question
               )
             }
           >
-            <div className={`flex justify-between items-center gap-4`}>
+            <div
+              className={`flex justify-between items-center gap-4`}
+            >
               <p className={`leading-none large-text`}>{item.question}</p>
               <Button className={`rounded-full`} variant="ghost" size="icon">
                 <ChevronDown

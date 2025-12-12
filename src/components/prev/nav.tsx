@@ -1,11 +1,6 @@
 import { Button } from "@/ui/button";
 import { componentExamples } from "../prev";
 
-const css = {
-  button: `rounded-full`,
-  selectedButton: `ring ring-accent shadow-xs text-primary`,
-};
-
 const Nav = ({
   selectedComponent,
   setSelectedComponent,
@@ -21,8 +16,9 @@ const Nav = ({
           <Button
             variant="outline"
             size="sm"
+            optionButton
+            isSelected={selected}
             key={item}
-            className={`${css.button} ${selected && css.selectedButton}`}
             onClick={() => setSelectedComponent(item)}
           >
             {item}

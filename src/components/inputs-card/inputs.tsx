@@ -1,6 +1,6 @@
 import { StateSetter } from "@/types";
 import { Input } from "@/ui/input";
-import { WrapperInput } from "@/ui/wrapper-input";
+import { WrapperInput } from "@/components/inputs-card/wrapper-input";
 import { useEffect } from "react";
 
 // function deduceFontAt1536px(
@@ -27,7 +27,6 @@ const Inputs = ({
   setnewMaxBase,
   setCanGenerate,
 }: Props) => {
-
   useEffect(() => {
     if (newMinBase && newMaxBase.toString().length > 1) {
       setCanGenerate((prev) => prev + 1);

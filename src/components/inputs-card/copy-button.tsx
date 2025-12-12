@@ -1,5 +1,5 @@
 import { Check, Copy } from "lucide-react";
-import { Button } from "./button";
+import { Button } from "../../ui/button";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 
@@ -64,7 +64,7 @@ const CopyButton = ({ output, disabled }: CopyButtonProps) => {
         ) : (
           <>
             <Copy {...iconStyle} />
-            {warn || "Copiar CSS"}
+            {warn || "Copiar os estilos gerados"}
           </>
         )}
       </div>
