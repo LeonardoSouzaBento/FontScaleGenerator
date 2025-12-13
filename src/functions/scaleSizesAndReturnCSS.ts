@@ -1,4 +1,4 @@
-import { CssValues, ScaledList } from "@/types";
+import { CssValues, ScaledList } from "@/data/types";
 import { genScaledList } from "./genScaledList";
 import { buttonSizes, textClasses } from "@/data/variables";
 import { removeExcessZerosAndToFix } from "./removeExcessZeros";

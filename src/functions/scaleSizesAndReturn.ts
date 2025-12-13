@@ -1,7 +1,8 @@
-import { CssValues, ScaledList } from "@/types";
+import { CssValues, ScaledList } from "@/data/types";
 import { genScaledList } from "./genScaledList";
 import { buttonSizes, textClasses, twTextVariables } from "@/data/variables";
 import { removeExcessZerosAndToFix } from "./removeExcessZeros";
+
 
 /* ---------- Funções auxiliares ---------- */
 export function genFontSizeScale(font640: number, font1280: number): string {
@@ -54,7 +55,7 @@ function genTextVariables(scaledList: ScaledList[]): string {
     .map(({ varName, className }) => {
       const values = scaledList.find((item) => item.tagName === className);
       if (varName === "--text-base") {
-        return `${varName}: 1em;`;
+        return `${varName}: 1.00em;`;
       }
       return `${varName}: ${values?.minSize}em;`;
     })

@@ -1,7 +1,8 @@
-import { SizeHierarchy, Scale, CssValues } from "@/types";
+import { SizeHierarchy, Scale, CssValues } from "@/data/types";
 
 export const sizes: SizeHierarchy[] = [
   { tagName: "body", pow: 0 },
+
   { tagName: ".big-h1", pow: 7 },
   { tagName: "h1", pow: 6 },
   { tagName: "h2", pow: 5 },
@@ -9,13 +10,15 @@ export const sizes: SizeHierarchy[] = [
   { tagName: "h4", pow: 3 },
   { tagName: "h5", pow: 2 },
   { tagName: "h6", pow: 1 },
+
   { tagName: ".large-text", pow: 1 },
   { tagName: ".normal-text", pow: 0 },
-  { tagName: ".small-text", pow: -1 },
+  { tagName: ".small-text, label", pow: -1 },
   { tagName: ".smaller-text", pow: -2 },
-  { tagName: "button", pow: 0 },
-  { tagName: ".small-button", pow: 0 },
-  { tagName: ".large-button", pow: 0 },
+
+  { tagName: "button", ratio: 0.94 },
+  { tagName: ".small-button", ratio: 0.88 },
+  { tagName: ".large-button", ratio: 1.0 },
 ];
 
 export const defaultCssValues: CssValues[] = sizes.map((item) => {
@@ -26,9 +29,9 @@ export const defaultCssValues: CssValues[] = sizes.map((item) => {
 });
 
 export const twTextVariables = [
-  {varName: "--text-base", className: ""},
-  {varName: "--text-xs", className: ".smaller-text"},
-  { varName: "--text-sm", className: ".small-text" },
+  { varName: "--text-xs", className: ".smaller-text" },
+  { varName: "--text-base", className: "" },
+  { varName: "--text-sm", className: ".small-text, label" },
   { varName: "--text-lg", className: ".large-text" },
 ];
 
@@ -46,7 +49,7 @@ export const scales: Scale[] = [
 ];
 
 export const buttonSizes = {
-  small: "0.90em",
-  normal: "0.95em",
-  large: "1.00em",
+  small: "0.88em",
+  normal: "1.00em",
+  large: "1.12em",
 };

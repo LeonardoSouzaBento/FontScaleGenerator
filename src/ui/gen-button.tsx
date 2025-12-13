@@ -1,4 +1,4 @@
-import { StateSetter } from "@/types";
+import { StateSetter } from "@/data/types";
 import { useState } from "react";
 import { Button } from "./button";
 

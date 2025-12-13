@@ -5,7 +5,8 @@ export type StateSetter<T> = Dispatch<SetStateAction<T>>;
 
 export interface SizeHierarchy {
   tagName: string;
-  pow: number;
+  pow?: number;
+  ratio?: number;
 }
 
 export interface ScaledList {

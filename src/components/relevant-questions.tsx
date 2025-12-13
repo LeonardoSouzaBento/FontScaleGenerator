@@ -1,7 +1,8 @@
+import { iconLg } from "@/styles/lucideIconStyles";
 import { Button } from "@/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const questions = [
   {
@@ -28,26 +29,19 @@ const questions = [
 
 const css = {
   wrapperQuestions: `mb-3 last:mb-0!`,
-  wrapperPAndButton: `h-auto flex justify-between items-center 
+  wrapperPAndButton: `h-auto flex justify-between
   gap-4 min-h-9`,
   selectedWrapperPAndButton: ``,
   pQuestion: `box-content text-lg`,
-  pAnswer: `text-muted-foreground`,
+  pAnswer: `text-muted-foreground xl:pr-4`,
 };
 
 const RelevantQuestions = () => {
   const [selectedQuestion, setSelectedQuestion] = useState<string>("");
-  const [selectedAnswer, setSelectedAnswer] = useState<string>("");
-
-  useEffect(() => {
-    setSelectedAnswer(
-      questions.find((item) => item.question === selectedQuestion)?.answer || ""
-    );
-  }, [selectedQuestion]);
 
   return (
-    <Card className={`w-full max-h-max xl:max-h-none`}>
-      <CardHeader className={`mb-2`}>
+    <Card>
+      <CardHeader className={`mb-3`}>
         <CardTitle>Perguntas pertinentes</CardTitle>
       </CardHeader>
       <CardContent>
@@ -75,12 +69,13 @@ const RelevantQuestions = () => {
                     variant="ghost"
                     size="icon"
                   >
-                    <ChevronDown className={selected ? "rotate-180" : ""} />
+                    <ChevronDown {...iconLg} className={selected ? "rotate-180" : ""}/>
                   </Button>
                 </div>
-                {selected && (
-                  <p className={`${css.pAnswer}`}>{selectedAnswer}</p>
-                )}
+
+                <CollapsibleText isOpen={selected}>
+                  {item.answer}
+                </CollapsibleText>
               </div>
             );
           })}
@@ -91,3 +86,40 @@ const RelevantQuestions = () => {
 };
 
 export default RelevantQuestions;
+
+type Props = {
+  isOpen: boolean;
+  children: React.ReactNode;
+};
+
+export const CollapsibleText = ({ isOpen, children }: Props) => {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const [height, setHeight] = useState<number>(0);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    if (isOpen) {
+      setHeight(ref.current.scrollHeight);
+    } else {
+      setHeight(0);
+    }
+  }, [isOpen, children]);
+
+  return (
+    <p
+      ref={ref}
+      style={{ height }}
+      className="
+        overflow-hidden
+        transition-[height,opacity]
+        duration-200
+        ease-out
+        text-muted-foreground
+        pr-6
+      "
+    >
+      {children}
+    </p>
+  );
+};

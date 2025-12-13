@@ -10,6 +10,7 @@ interface Props {
   disabled: boolean;
   returnType: string;
   canGenerate: number;
+  rootFontSize: number;
 }
 
 const Output = ({
@@ -19,9 +20,11 @@ const Output = ({
   returnType,
   secondOutput,
   canGenerate,
+  rootFontSize,
 }: Props) => {
   const [animate, setAnimate] = useState<boolean>(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const preHeight = (cardHeight / rootFontSize - 3).toFixed(3);
 
   useEffect(() => {
     if (!cardRef.current) return;
@@ -41,16 +44,19 @@ const Output = ({
     <Card
       ref={cardRef}
       className={`animate-in fade-in slide-in-from-bottom-4 relative max-h-full 
-      space-y-5 overflow-y-scroll pr-5.5`}
+      space-y-5 pr-5`}
       noHeader
-      style={{ maxHeight: cardHeight || "22rem" }}
+      style={{ height: cardHeight || "22rem" }}
     >
       <div className={`relative space-y-4`}>
         <div
           className={`absolute top-0 -z-1 left-0 size-full rounded-md bg-transparent 
             transition-all duration-200 ${animate && "bg-white/66 z-2"}`}
         />
-        <pre className={`${disabled && "text-neutral-400 h-max max-h-none"} `}>
+        <pre
+          className={`${disabled && "text-neutral-400"}`}
+          style={{ height: `${preHeight}rem` }}
+        >
           {disabled && returnType === "tw"
             ? outputExample
             : returnType === "tw"

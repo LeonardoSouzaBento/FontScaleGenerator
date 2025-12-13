@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { ClampValue, ScaledList, StateSetter } from "@/types";
-import { scales, sizes } from "@/data/variables";
-import { generateClamp } from "@/functions/buildClampTable";
+import CopyButton from "@/components/inputs-card/copy-button";
+import { scales } from "@/data/variables";
+import { generateClamp } from "@/functions/generateClamp";
+import { genScaledList } from "@/functions/genScaledList";
 import { scaleSizesAndReturn } from "@/functions/scaleSizesAndReturn";
 import { scaleSizesAndReturnCSS } from "@/functions/scaleSizesAndReturnCSS";
-import { genScaledList } from "@/functions/genScaledList";
-import CopyButton from "@/components/inputs-card/copy-button";
+import { ClampValue, ScaledList, StateSetter } from "@/data/types";
+import { useEffect, useState } from "react";
 import Inputs from "./inputs-card/inputs";
 import OptionsScale from "./inputs-card/optionsScale";
 import ReturnOptions from "./inputs-card/return-options";
@@ -71,7 +71,7 @@ const InputsCard = ({
       } else {
         const fullCss = scaleSizesAndReturnCSS(minEm, maxEm, scaleValue);
         console.log(fullCss);
-        
+
         setSecondOutput(fullCss);
       }
     }
@@ -105,7 +105,7 @@ const InputsCard = ({
       />
 
       <div
-        className={`flex flex-col gap-3 pt-3.5 pb-4 sm:flex-row border-t 
+        className={`flex flex-col gap-3 pt-3 pb-5 sm:flex-row border-t 
         border-b border-input box-content`}
       >
         <OptionsScale
@@ -119,7 +119,12 @@ const InputsCard = ({
           setCanGenerate={setCanGenerate}
         />
       </div>
-      <CopyButton output={output} secondOutput={secondOutput} disabled={disabled} returnType={returnType}/>
+      <CopyButton
+        output={output}
+        secondOutput={secondOutput}
+        disabled={disabled}
+        returnType={returnType}
+      />
     </>
   );
 };

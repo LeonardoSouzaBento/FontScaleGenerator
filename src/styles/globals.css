@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --text-base: 1em;
   --text-xs: 0.922275em;
+  --text-base: 1em;
   --text-sm: 0.984067em;
   --text-lg: 1.12035em;
   /* Cores */
@@ -95,7 +95,8 @@ html {
     background: oklch(87% 0 0);
     border-radius: 6px;
   }
-  div {
+  div,
+  form {
     scrollbar-width: thin;
     scrollbar-color: var(--color-gray-200) #ffffff00; /*botão | fundo */
   }
@@ -110,7 +111,6 @@ html {
     text-[1.05000em] sm:text-[1.05938em] md:text-[1.06125em] lg:text-[1.06500em] 
     xl:text-[1.06875em] 2xl:text-[1.07250em] leading-normal;
   }
-
   html,
   body {
     scrollbar-width: none; /* Firefox */
@@ -125,15 +125,22 @@ html {
     @apply cursor-default;
   }
   button {
-    @apply cursor-pointer capitalize;
+    font-family: "Google Sans", sans-serif;
+    @apply cursor-pointer capitalize flex items-center;
   }
   label {
-    @apply text-muted-foreground;
+    @apply text-muted-foreground tracking-normal;
   }
   pre {
     font-family: "Ubuntu Mono", monospace;
     @apply cursor-default bg-background text-foreground 
     rounded-md wrap-break-word py-4 px-5 whitespace-pre-wrap
-    transition-opacity duration-400 font-normal;
+    transition-opacity duration-400 font-normal overflow-y-scroll;
+  }
+  textarea {
+    @apply bg-background text-foreground pl-3 pt-3 pb-4 
+    rounded-md border border-input ring-offset-background placeholder:text-muted-foreground
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+    disabled:cursor-not-allowed disabled:opacity-50 w-full h-32 resize-none;
   }
 }

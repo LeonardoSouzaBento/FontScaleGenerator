@@ -1,5 +1,5 @@
 import { useResizeWatcher } from "@/hooks/useResizeWatcher";
-import { ClampValue } from "@/types";
+import { ClampValue } from "@/data/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import { useEffect, useRef, useState } from "react";
 import ButtonsSection from "./prev/buttons-section";
@@ -10,7 +10,7 @@ import TitlesSection from "./prev/titles-section";
 
 const css = {
   wrapper: `w-full mb-7 mx-auto`,
-  section: `min-h-max space-y-5 rounded-none box-content`,
+  section: `min-h-max space-y-3 rounded-none box-content`,
 };
 
 export const componentExamples = [
@@ -23,7 +23,9 @@ export const componentExamples = [
 const Prev = ({ clampValues }: { clampValues: ClampValue }) => {
   const [selectedComponent, setSelectedComponent] = useState<string>("títulos");
   const firstSectionRef = useRef<HTMLDivElement>(null);
-  const [firstSectionHeight, setFirstSectionHeight] = useState<number>(0);
+  const [firstSectionHeight, setFirstSectionHeight] = useState<string | number>(
+    "auto"
+  );
   const [wasResize, setWasResize] = useState<number>();
   useResizeWatcher(setWasResize);
 
@@ -34,25 +36,27 @@ const Prev = ({ clampValues }: { clampValues: ClampValue }) => {
   }, []);
 
   useEffect(() => {
-    if (wasResize) {
-      setFirstSectionHeight(firstSectionRef.current.offsetHeight);
+    if (firstSectionRef.current) {
+      setFirstSectionHeight(firstSectionRef.current.scrollHeight);
     }
   }, [wasResize]);
 
   return (
     <Card className={css.wrapper}>
-      <CardHeader className={`pb-4`}>
+      <CardHeader className={`pb-5`}>
         <CardTitle className={`text-primary`}>Prévia</CardTitle>
         <Nav
           selectedComponent={selectedComponent}
           setSelectedComponent={setSelectedComponent}
         />
       </CardHeader>
-      
+
       <CardContent>
         <section
           className={css.section}
-          style={{ height: firstSectionHeight || "auto" }}
+          style={{
+            height: firstSectionHeight,
+          }}
         >
           {selectedComponent === "títulos" && (
             <TitlesSection

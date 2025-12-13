@@ -5,11 +5,12 @@ import Prev from "@/components/prev";
 import PersonalGuidelines from "@/components/prev/personal-guidelines";
 import RelevantQuestions from "@/components/relevant-questions";
 import { useResizeWatcher } from "@/hooks/useResizeWatcher";
-import { ClampValue } from "@/types";
+import { ClampValue } from "@/data/types";
 import { Card, CardContent } from "@/ui/card";
 import Output from "@/components/output";
 import { useEffect, useRef, useState } from "react";
 import MoreStylesModal from "@/components/more-styles-modal";
+import { useRemObserver } from "@/hooks/useRemObserver";
 
 const mainCss = `h-max px-3 sm:px-6 max-w-2xl xl:max-w-7xl mx-auto box-content`;
 
@@ -28,6 +29,7 @@ const Index = () => {
   const [wasResize, setWasResize] = useState<number>();
   const cardRef = useRef<HTMLDivElement>(null);
   useResizeWatcher(setWasResize);
+  const rootFontSize = useRemObserver();
 
   useEffect(() => {
     if (cardRef.current) {
@@ -47,7 +49,7 @@ const Index = () => {
 
       <main
         className={`${mainCss}
-          pb-7 overflow-hidden grid grid-rows-2 xl:grid-rows-1 
+          pb-7 space-y-7 overflow-hidden xl:pb-0 xl:grid
           xl:grid-cols-2 gap-7 relative`}
       >
         <Card ref={cardRef} className={`w-full h-full max-h-max mx-auto pt-5`}>
@@ -74,19 +76,21 @@ const Index = () => {
           disabled={disabled}
           returnType={returnType}
           canGenerate={canGenerate}
+          rootFontSize={rootFontSize}
         />
       </main>
 
-      <div className={`${mainCss} mb-8`}>
+      <div className={`${mainCss} mb-7`}>
         <Prev clampValues={clampValues} />
-        <div
-          className={`flex flex-col gap-7`}
-        >
-          <PersonalGuidelines setShowMoreStyles={setShowMoreStyles}/>
+
+        <div className={`block space-y-7 xl:grid xl:grid-cols-2 xl:gap-7`}>
+          <PersonalGuidelines setShowMoreStyles={setShowMoreStyles} />
           <RelevantQuestions />
         </div>
       </div>
-      {showMoreStyles && <MoreStylesModal setShowMoreStyles={setShowMoreStyles}/>}
+      {showMoreStyles && (
+        <MoreStylesModal setShowMoreStyles={setShowMoreStyles} rootFontSize={rootFontSize}/>
+      )}
       <Footer />
     </div>
   );

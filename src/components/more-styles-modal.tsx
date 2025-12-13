@@ -1,6 +1,6 @@
 import { moreCSSStyles, moreTwStyles } from "@/data/moreStyles";
-import { iconSm, iconXs, primary } from "@/lucide-icon-styles";
-import { StateSetter } from "@/types";
+import { iconSm, iconXs } from "@/styles/lucideIconStyles";
+import { StateSetter } from "@/data/types";
 import { Button } from "@/ui/button";
 import {
   Card,
@@ -10,20 +10,46 @@ import {
   CardTitle,
 } from "@/ui/card";
 import { Copy, Eye, EyeClosed, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useResizeWatcher } from "@/hooks/useResizeWatcher";
 
 const options = [
   { name: "Tailwind", value: "tw", icon: Eye },
   { name: "CSS", value: "CSS", icon: EyeClosed },
 ];
 
+function getPreHeight(
+  cardRef: React.RefObject<HTMLDivElement>,
+  headerRef: React.RefObject<HTMLDivElement>,
+  buttonsDivRef: React.RefObject<HTMLDivElement>,
+  rootFontSize: number
+) {
+  const cardHeight = cardRef.current.scrollHeight;
+  const headerHeight = headerRef.current?.scrollHeight || 0;
+  const buttonsDivHeight = buttonsDivRef.current?.scrollHeight || 0;
+  const preHeight = (
+    (cardHeight - headerHeight - buttonsDivHeight) / rootFontSize -
+    1.5
+  ).toFixed(3);
+  return preHeight;
+}
+
 const MoreStylesModal = ({
   setShowMoreStyles,
+  rootFontSize,
 }: {
   setShowMoreStyles: StateSetter<boolean>;
+  rootFontSize: number;
 }) => {
   const [selected, setSelected] = useState<string>("tw");
   const [copied, setCopied] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [preHeight, setPreHeight] = useState("0");
+  const [wasResized, setWasResized] = useState<number>(0);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const buttonsDivRef = useRef<HTMLDivElement>(null);
+
+  useResizeWatcher(setWasResized);
 
   const copy = () => {
     navigator.clipboard.writeText(
@@ -36,11 +62,19 @@ const MoreStylesModal = ({
   };
 
   useEffect(() => {
+    if (!cardRef.current) {
+      setPreHeight(getPreHeight(cardRef, headerRef, buttonsDivRef, rootFontSize));
+    }
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto";
     };
   }, []);
+
+  useEffect(() => {
+    if (!cardRef.current) return;
+    setPreHeight(getPreHeight(cardRef, headerRef, buttonsDivRef, rootFontSize));
+  }, [wasResized]);
 
   return (
     <div
@@ -49,11 +83,13 @@ const MoreStylesModal = ({
         items-center justify-center bg-black/7 rounded-none p-0 box-border`}
     >
       <Card
+        ref={cardRef}
         onClick={(e) => e.stopPropagation()}
         className={`w-full h-[calc(100vh-3rem)] max-w-xl shadow-xl 
-        rounded-lg pb-0 overflow-y-scroll`}
+        rounded-lg pb-0`}
       >
         <CardHeader
+          ref={headerRef}
           className={`w-full flex flex-row flex-nowrap 
           justify-between mb-0`}
         >
@@ -67,7 +103,7 @@ const MoreStylesModal = ({
             size="icon"
             variant="secondary"
             className={`border-border rounded-full 
-            -mr-2`}
+            -mr-1`}
             onClick={(e) => {
               e.stopPropagation();
               setShowMoreStyles(false);
@@ -77,21 +113,24 @@ const MoreStylesModal = ({
           </Button>
         </CardHeader>
 
-        <CardContent className={`flex flex-col`}>
-          <div className={`sticky top-0 z-6 bg-white py-5`}>
+        <CardContent className={`w-full flex flex-col`}>
+          <div
+            ref={buttonsDivRef}
+            className={`w-full sticky top-0 z-6 bg-white py-4.5`}
+          >
             <div
-              className={`h-max py-px flex gap-3 justify-start 
-                flex-wrap`}
+              className={`w-full h-max py-px flex gap-4 justify-start 
+                flex-wrap sm:flex-nowrap`}
             >
               <Button
                 size="sm"
-                className={`rounded-full pl-3.5 mb-px`}
+                className={`min-w-1/3 shrink-auto rounded-full pl-3.5`}
                 onClick={copy}
               >
-                <Copy {...iconXs} color="white" />
+                <Copy {...iconXs} />
                 {copied ? "Copiado!" : "Copiar estilos"}
               </Button>
-              
+
               {options.map((option) => {
                 const isSelected = selected === option.value;
                 return (
@@ -101,13 +140,13 @@ const MoreStylesModal = ({
                     key={option.value}
                     optionButton
                     isSelected={isSelected}
-                    className={`rounded-full shadow-xs`}
+                    className={`sm:min-w-max rounded-full shadow-xs`}
                     onClick={() => {
                       setSelected(option.value);
                     }}
                   >
                     {isSelected ? (
-                      <Eye {...iconXs} color={primary} className={`scale-102`} />
+                      <Eye {...iconXs} className={`scale-102`} />
                     ) : (
                       <EyeClosed {...iconXs} className={`scale-93`} />
                     )}
@@ -119,8 +158,8 @@ const MoreStylesModal = ({
           </div>
 
           <pre
-            className={`bg-background rounded-md max-h-none 
-                overflow-y-visible mb-6`}
+            className={`bg-background rounded-md max-h-none mb-6`}
+            style={{ height: `${preHeight}rem` }}
           >
             {selected === "tw" ? moreTwStyles : moreCSSStyles}
           </pre>

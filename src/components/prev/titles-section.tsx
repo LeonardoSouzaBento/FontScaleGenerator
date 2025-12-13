@@ -1,4 +1,4 @@
-import { ClampValue } from "@/types";
+import { ClampValue } from "@/data/types";
 import { useEffect } from "react";
 
 const TitlesSection = ({
@@ -8,7 +8,6 @@ const TitlesSection = ({
   clampValues: ClampValue;
   props: { ref: React.RefObject<HTMLDivElement> };
 }) => {
-
   return (
     <div ref={props.ref}>
       <h1 style={{ fontSize: clampValues[".big-h1"] }}>Nome Marca</h1>

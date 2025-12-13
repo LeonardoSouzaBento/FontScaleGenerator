@@ -1,6 +1,6 @@
 import { Button } from "@/ui/button";
 import { scales } from "@/data/variables";
-import { StateSetter } from "@/types";
+import { StateSetter } from "@/data/types";
 
 interface OptionsScaleProps {
   scaleValue: number;
@@ -18,13 +18,7 @@ const OptionsScale = ({
       className={`flex flex-col gap-3 rounded-none border-b 
         border-input sm:border-b-0 pb-4.5 sm:pb-0`}
     >
-      <label
-        htmlFor="scale"
-        className={` tracking-wide 
-            text-muted-foreground`}
-      >
-        Escala tipográfica
-      </label>
+      <label htmlFor="scale">Escala tipográfica</label>
       <div
         className={`flex flex-wrap gap-3 rounded-md 
            text-foreground`}

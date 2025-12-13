@@ -1,4 +1,4 @@
-import { StateSetter } from "@/types";
+import { StateSetter } from "@/data/types";
 import { useEffect, useRef } from "react";
 
 export function useResizeWatcher(setWasResize: StateSetter<number>) {
@@ -17,9 +17,10 @@ export function useResizeWatcher(setWasResize: StateSetter<number>) {
       resizeDowntime.current = setTimeout(() => {
         const widthOfWindow = window.innerWidth;
 
-        if (windowWidthInitialRef.current !== null &&
-            widthOfWindow !== windowWidthInitialRef.current) {
-
+        if (
+          windowWidthInitialRef.current !== null &&
+          widthOfWindow !== windowWidthInitialRef.current
+        ) {
           setWasResize((prev) => prev + 1);
           windowWidthInitialRef.current = widthOfWindow;
         }
@@ -36,4 +37,3 @@ export function useResizeWatcher(setWasResize: StateSetter<number>) {
     };
   }, [setWasResize]);
 }
-

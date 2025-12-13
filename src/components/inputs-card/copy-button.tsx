@@ -1,7 +1,8 @@
+import { iconXs } from "@/styles/lucideIconStyles";
 import { Check, Copy } from "lucide-react";
-import { Button } from "../../ui/button";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
+import { Button } from "../../ui/button";
 
 interface CopyButtonProps {
   output: string;
@@ -19,9 +20,12 @@ hover:scale-[1.02] relative`,
   normal-case rounded-md small-text`,
 };
 
-const iconStyle = { strokeWidth: 2.3, size: "1.125rem" };
-
-const CopyButton = ({ output, secondOutput, disabled, returnType }: CopyButtonProps) => {
+const CopyButton = ({
+  output,
+  secondOutput,
+  disabled,
+  returnType,
+}: CopyButtonProps) => {
   const [copied, setCopied] = useState(false);
   const [warn, setWarn] = useState("");
   const timeOutRef = useRef<number>(0);
@@ -46,6 +50,7 @@ const CopyButton = ({ output, secondOutput, disabled, returnType }: CopyButtonPr
 
   return (
     <Button
+      isDisable={disabled}
       onClick={handleCopy}
       className={`${css.button} ${disabled && css.disabled}`}
     >
@@ -55,22 +60,9 @@ const CopyButton = ({ output, secondOutput, disabled, returnType }: CopyButtonPr
         </div>
       )}
 
-      <div
-        className={`h-full min-w-max flex items-center 
-          justify-center gap-2.5 ${disabled && "grayscale-100 opacity-33"}`}
-      >
-        {copied ? (
-          <>
-            <Check {...iconStyle} />
-            Copiado!
-          </>
-        ) : (
-          <>
-            <Copy {...iconStyle} />
-            {warn || "Copiar os estilos gerados"}
-          </>
-        )}
-      </div>
+      {copied ? <Check {...iconXs} /> : <Copy {...iconXs} />}
+
+      {warn || copied ? "Copiado!" : "Copiar estilos gerados"}
     </Button>
   );
 };

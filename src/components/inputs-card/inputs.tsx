@@ -1,4 +1,4 @@
-import { StateSetter } from "@/types";
+import { StateSetter } from "@/data/types";
 import { Input } from "@/ui/input";
 import { WrapperInput } from "@/components/inputs-card/wrapper-input";
 import { useEffect } from "react";

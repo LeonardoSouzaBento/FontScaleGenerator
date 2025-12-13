@@ -1,17 +1,19 @@
-import { ClampValue } from "@/types";
+import { ClampValue } from "@/data/types";
 
-const ParagraphsSection = ({clampValues}: {clampValues: ClampValue}) => {
+const ParagraphsSection = ({ clampValues }: { clampValues: ClampValue }) => {
   return (
     <>
       <h4>Variações de Parágrafo</h4>
-      <p className="p-lg">
+      <p style={{ fontSize: clampValues[".large-text"] }}>
         Parágrafo Grande — ideal para introduções, heros ou destaque moderado.
       </p>
-      <p className="p-md">Parágrafo Padrão — usado para leitura contínua.</p>
-      <p className="p-sm">
+      <p style={{ fontSize: clampValues[".normal-text"] }}>
+        Parágrafo Padrão — usado para leitura contínua.
+      </p>
+      <p style={{ fontSize: clampValues[".small-text"] }}>
         Parágrafo Pequeno — usado para textos auxiliares, notas e descrições.
       </p>
-      <p className="p-xs">
+      <p style={{ fontSize: clampValues[".smaller-text"] }}>
         Parágrafo Extra Pequeno — ideal para rótulos, avisos de rodapé e
         microtexto.
       </p>
