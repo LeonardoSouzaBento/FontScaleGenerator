@@ -1,5 +1,6 @@
 import { ScaledList } from "@/types";
 import { sizes } from "@/data/variables";
+import { removeExcessZerosAndToFix } from "./removeExcessZeros";
 
 export function genScaledList(
   minSizeBody: number,
@@ -9,12 +10,12 @@ export function genScaledList(
   const scaledList = sizes.map((item) => {
     return {
       ...item,
-      minSize: Number(
-        (minSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)
-      ),
-      maxSize: Number(
-        (maxSizeBody * Math.pow(scaleValue, item.pow)).toFixed(6)
-      ),
+      minSize: Number(removeExcessZerosAndToFix(
+        minSizeBody * Math.pow(scaleValue, item.pow)
+      )),
+      maxSize: Number(removeExcessZerosAndToFix(
+        maxSizeBody * Math.pow(scaleValue, item.pow)
+      )),
     };
   });
   return scaledList;

@@ -1,6 +1,7 @@
 import { CssValues, ScaledList } from "@/types";
 import { genScaledList } from "./genScaledList";
 import { buttonSizes, textClasses, twTextVariables } from "@/data/variables";
+import { removeExcessZerosAndToFix } from "./removeExcessZeros";
 
 /* ---------- Funções auxiliares ---------- */
 export function genFontSizeScale(font640: number, font1280: number): string {
@@ -10,7 +11,7 @@ export function genFontSizeScale(font640: number, font1280: number): string {
     // 0, 640, 768, 1024, 1280, 1536
     const proportions: number[] = [0, 0.5, 0.6, 0.8, 1, 1.2];
     const size = proportions[index] * (font1280 - font640) + font640;
-    return `${size}`;
+    return removeExcessZerosAndToFix(size);
   };
 
   let result: string = "";
@@ -19,7 +20,7 @@ export function genFontSizeScale(font640: number, font1280: number): string {
     let size: string;
     size = calcFontSize(index);
 
-    result += `${item ? item + ":" : ""}text-[${Number(size).toFixed(5)}rem] `;
+    result += `${item ? item + ":" : ""}text-[${size}rem] `;
   });
 
   return result.trim();
@@ -38,7 +39,7 @@ function buildTailwindCSSTable(scaledList: ScaledList[]): CssValues[] {
     if (textClasses.includes(tagName)) {
       return {
         tagName,
-        value: `text-[${minSize.toFixed(6)}em];`,
+        value: `text-[${minSize}em];`,
       };
     }
     return {
@@ -49,13 +50,15 @@ function buildTailwindCSSTable(scaledList: ScaledList[]): CssValues[] {
 }
 
 function genTextVariables(scaledList: ScaledList[]): string {
-  const variables = twTextVariables.map(({ varName, className }) => {
-    const values = scaledList.find((item) => item.tagName === className);
-    if (varName === "--text-base") {
-      return `${varName}: 1em;`;
-    }
-    return `${varName}: ${values?.minSize.toFixed(6)}em;`;
-  }).join("\n");
+  const variables = twTextVariables
+    .map(({ varName, className }) => {
+      const values = scaledList.find((item) => item.tagName === className);
+      if (varName === "--text-base") {
+        return `${varName}: 1em;`;
+      }
+      return `${varName}: ${values?.minSize}em;`;
+    })
+    .join("\n");
 
   return `@theme {\n...\n${variables}\n...\n}`;
 }

@@ -1,6 +1,7 @@
 import { CssValues, ScaledList } from "@/types";
 import { genScaledList } from "./genScaledList";
 import { buttonSizes, textClasses } from "@/data/variables";
+import { removeExcessZerosAndToFix } from "./removeExcessZeros";
 
 function scaleSizesForPureCSS(font640: number, font1280: number): string {
   const breakpoints = [
@@ -20,9 +21,9 @@ function scaleSizesForPureCSS(font640: number, font1280: number): string {
     const size = proportions[index] * (font1280 - font640) + font640;
 
     if (index === 0) {
-      result += `font-size: ${size.toFixed(5)}rem;\n`;
+      result += `font-size: ${removeExcessZerosAndToFix(size)}rem;\n`;
     } else {
-      result += `@media (min-width: ${bp.min}px) {font-size: ${size.toFixed(5)}rem;}\n`;
+      result += `@media (min-width: ${bp.min}px) {font-size: ${removeExcessZerosAndToFix(size)}rem;}\n`;
     }
   });
 
@@ -44,7 +45,7 @@ function buildCSSPureTable(scaledList: ScaledList[]): CssValues[] {
     if (textClasses.includes(tagName)) {
       table.push({
         tagName,
-        value: `font-size: ${minSize.toFixed(6)}em;`,
+        value: `font-size: ${minSize}em;`,
       });
     } else {
       table.push({
